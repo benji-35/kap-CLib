@@ -11,7 +11,7 @@ string str_substring(cstring str, ksize_t from, ksize_t to) {
     string new = str_create_empty();
     ksize_t len = str_len(str);
 
-    if (from > len || to >= len)
+    if (from > len || to >= len || from > to)
         return NULL;
     for (ksize_t i = from; i <= to; i++)
         str_add_char(&new, str[i]);

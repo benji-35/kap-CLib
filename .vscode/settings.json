@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "kapassert.h": "c"
+        "kapassert.h": "c",
+        "kapmemory.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

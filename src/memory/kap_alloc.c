@@ -7,7 +7,7 @@
 
 #include "kapmemory.h"
 
-void *kapalloc(size_t size) {
+void *kapmalloc(size_t size) {
     void *ptr = malloc(size);
 
     if (ptr == NULL)

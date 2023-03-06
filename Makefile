@@ -28,8 +28,8 @@ build_tests: all $(OBJ_TESTS)
 	@echo "Kap C-Lib => $@ Compiling $<"
 
 start_runnig_tests: build_tests
-	./kap_tests
-	gcovr -r . -e $(SRC_TESTS)
+	clear
+	@(./kap_tests && gcovr -r . -e $(SRC_TESTS)) || echo -e "\nKap C-Lib => $@ \033[0;31mTests failed\033[39m"
 
 run_tests: build_tests start_runnig_tests fclean
 

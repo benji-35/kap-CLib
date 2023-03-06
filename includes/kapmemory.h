@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2023
+** KAP PROJECT, 2023
 ** C Lib
 ** File description:
 ** kapmemory
@@ -12,6 +12,6 @@
     #include <stdlib.h>
 
     void kapfree(void *ptr);
-    void *kapalloc(size_t size);
+    void *kapmalloc(size_t size);
 
 #endif /* !KAPMEMORY_H_ */

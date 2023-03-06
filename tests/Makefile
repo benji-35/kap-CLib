@@ -7,6 +7,8 @@
 
 PATH_TESTS = ./tests/
 
-SRC_TESTS	=	$(PATH_TESTS)kap_string_tests.c
+SRC_TESTS	=	$(PATH_TESTS)kap_string_tests.c	\
+				$(PATH_TESTS)kap_string_errors_tests.c	\
+				#$(PATH_TESTS)kap_memory_tests.c	\
 
 OBJ_TESTS	=	$(SRC_TESTS:.c=.o)
