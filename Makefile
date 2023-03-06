@@ -12,6 +12,8 @@ include ./tests/Makefile
 NAME = libkap.a
 GCC = gcc
 
+.Phony: all clean fclean re run_tests
+
 all: $(NAME)
 
 .c.o:
@@ -22,8 +24,12 @@ $(NAME): $(OBJ_STRING)
 	@ar rc $(NAME) $(OBJ_STRING)
 
 build_tests: all $(OBJ_TESTS)
-	$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion
+	$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion --coverage
 	@echo "Kap C-Lib => $@ Compiling $<"
+
+run_tests: build_tests
+	./kap_tests
+	gcovr -r . -e $(SRC_TESTS)
 
 clean:
 	@rm -f $(OBJ_STRING)
