@@ -17,5 +17,7 @@ SRC_STRING	=	$(PATH_STRING)string_add.c				\
 				$(PATH_STRING)string_last_index_of.c	\
 				$(PATH_STRING)string_length.c			\
 				$(PATH_STRING)string_remove.c			\
+				$(PATH_STRING)string_start_with.c		\
+				$(PATH_STRING)string_end_with.c			\
 
 OBJ_STRING	=	$(SRC_STRING:.c=.o)

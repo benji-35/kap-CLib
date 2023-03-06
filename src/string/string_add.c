@@ -17,7 +17,7 @@ void str_add_char(string *str, char c) {
         new_str[i] = (*str)[i];
     new_str[size] = c;
     new_str[size + 1] = '\0';
-    free(*str);
+    kapfree(*str);
     *str = new_str;
 }
 
@@ -33,6 +33,6 @@ void str_add_string(string *str, cstring cstr) {
     for (ksize_t i = 0; i < size2; i++)
         new_str[size + i] = cstr[i];
     new_str[size + size2] = '\0';
-    free(*str);
+    kapfree(*str);
     *str = new_str;
 }

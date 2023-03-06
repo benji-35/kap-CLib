@@ -9,6 +9,7 @@
 #define KAPSTRING_H_
 
 #include "kaplist.h"
+#include "kapmemory.h"
 
 typedef char *string;
 typedef const char *cstring;
@@ -111,6 +112,14 @@ typedef struct text_s {
     */
     extern bool str_contains_string(cstring str, cstring cstr);
     /**
+     * @brief check if string contains a char from a specific index
+    */
+    extern bool str_contains_char_from(cstring str, char c, ksize_t from);
+    /**
+     * @brief check if string contains a string from a specific index
+    */
+    extern bool str_contains_string_from(cstring str, cstring cstr, ksize_t from);
+    /**
      * @brief get index of a char in a string
     */
     extern ksize_t str_index_of_char(cstring str, char c);
@@ -164,6 +173,30 @@ typedef struct text_s {
      * @param all bool (if true, remove all occurences of the string)
     */
     extern void str_remove_string_from(string *str, cstring cstr, ksize_t from, bool all);
+    /**
+     * @brief check if string starts with a char
+    */
+    extern bool str_start_cwith(cstring str, char c);
+    /**
+     * @brief check if string starts with a string
+    */
+    extern bool str_start_with(cstring str, cstring cstr);
+    /**
+     * @brief check if string starts with a char from a specific index
+    */
+    extern bool str_start_cwith_from(cstring str, char c, ksize_t index);
+    /**
+     * @brief check if string starts with a string from a specific index
+    */
+   bool str_start_with_from(cstring str, cstring start, ksize_t index);
+    /**
+     * @brief check if string ends with a char
+    */
+    extern bool str_end_cwith(cstring str, char c);
+    /**
+     * @brief check if string ends with a string
+    */
+    extern bool str_end_with(cstring str, cstring cstr);
 
 #endif
 

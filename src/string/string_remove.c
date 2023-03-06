@@ -14,22 +14,22 @@ void str_remove_char(string *str, char c, bool all) {
 void str_remove_char_from(string *str, char c, ksize_t index, bool all) {
     ksize_t len = str_len(*str);
     bool first = false;
-    ksize_t i = index;
-    ksize_t j = 0;
+    bool can_remove = false;
     string new_str = str_create_empty();
 
-    while (i < len) {
-        if ((*str)[i] != c) {
-            str_add_char(&new_str, (*str)[i]);
-            j++;
-        } else if (first == false && all == false) {
-            str_add_char(&new_str, (*str)[i]);
+    for (ksize_t i = 0; i < len; i++) {
+        if (i >= index)
+            can_remove = true;
+        if ((*str)[i] == c && can_remove == true) {
+            if (first == true && all == false) {
+                str_add_char(&new_str, (*str)[i]);
+            }
             first = true;
-            j++;
+        } else {
+            str_add_char(&new_str, (*str)[i]);
         }
-        i++;
     }
-    free(*str);
+    kapfree(*str);
     *str = new_str;
 }
 
@@ -39,23 +39,24 @@ void str_remove_string(string *str, cstring to_remove, bool all) {
 
 void str_remove_string_from(string *str, cstring to_remove, ksize_t index, bool all) {
     ksize_t len = str_len(*str);
-    ksize_t to_remove_len = str_len(to_remove);
+    ksize_t len_to_remove = str_len(to_remove);
     bool first = false;
-    ksize_t i = index;
-    ksize_t j = 0;
+    bool can_remove = false;
     string new_str = str_create_empty();
 
-    while (i < len) {
-        if (str_is_equal_from(*str, to_remove, i, true) == false) {
-            str_add_char(&new_str, (*str)[i]);
-            j++;
-        } else if (first == false && all == false) {
-            str_add_char(&new_str, (*str)[i]);
+    for (ksize_t i = 0; i < len; i++) {
+        if (i >= index)
+            can_remove = true;
+        if (str_start_with_from(*str, to_remove, i) && can_remove == true) {
+            if (first == true && all == false) {
+                str_add_char(&new_str, (*str)[i]);
+            }
             first = true;
-            j++;
+            i += len_to_remove - 1;
+        } else {
+            str_add_char(&new_str, (*str)[i]);
         }
-        i += to_remove_len;
     }
-    free(*str);
+    kapfree(*str);
     *str = new_str;
 }

@@ -152,3 +152,41 @@ Test(string_tests, string_remove_string_from) {
     str_remove_string_from(&str, "World", 6, true);
     cr_assert_str_eq(str, "Hello !", "Expected \"Hello !\", got \"%s\"", str);
 }
+
+//start tests
+Test(string_tests, string_start_with_char) {
+    string str = str_create_string("Hello World!");
+    bool result = str_start_cwith(str, 'H');
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+Test(string_tests, string_start_with_string) {
+    string str = str_create_string("Hello World!");
+    bool result = str_start_with(str, "Hello");
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+Test(string_tests, string_start_with_char_from) {
+    string str = str_create_string("Hello World!");
+    bool result = str_start_cwith_from(str, 'W', 6);
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+Test(string_tests, string_start_with_string_from) {
+    string str = str_create_string("Hello World!");
+    bool result = str_start_with_from(str, "World", 6);
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+//end tests
+Test(string_tests, string_end_with_char) {
+    string str = str_create_string("Hello World!");
+    bool result = str_end_cwith(str, '!');
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+Test(string_tests, string_end_with_string) {
+    string str = str_create_string("Hello World!");
+    bool result = str_end_with(str, "World!");
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
