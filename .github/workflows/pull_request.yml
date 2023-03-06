@@ -9,12 +9,9 @@ jobs:
       - uses: boa-dev/criterion-compare-action@v3
         with:
           benchName: "Unit Test"
-          # Optional. Disables the default features of a crate
           defaultFeatures: false
-          # Optional. Features activated in the benchmark
-          features: "async,tokio-support"
-          # Needed. The name of the branch to compare with. This default uses the branch which is being pulled against
           branchName: ${{ github.base_ref }}
-          # Optional. Default is `${{ github.token }}`.
           token: ${{ secrets.GITHUB_TOKEN }}
-#tests
+      - name: Running tests
+        run: |
+          make run_tests
