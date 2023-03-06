@@ -82,6 +82,14 @@ typedef struct text_s {
      */
     extern bool str_is_equal(cstring str1, cstring str2, bool case_sensitive);
     /**
+     * @brief check if string is equal to another from index
+     * @param str1 constant string
+     * @param str2 constant string
+     * @param from ksize_t index
+     * @param case_sensitive bool (true if case sensitive)
+    */
+    extern bool str_is_equal_from(cstring str1, cstring str2, ksize_t from, bool case_sensitive);
+    /**
      * @brief check if string is not equal to another
      * @param str1 constant string
      * @param str2 constant string
@@ -126,6 +134,36 @@ typedef struct text_s {
      * @brief get index of a string in a string from a specific index
     */
     extern ksize_t str_last_index_of_string(cstring str, cstring cstr);
+    /**
+     * @brief remove a char from a string
+     * @param str string to remove char from
+     * @param c char to remove
+     * @param all bool (if true, remove all occurences of the char)
+    */
+    extern void str_remove_char(string *str, char c, bool all);
+    /**
+     * @brief remove a string from a string
+     * @param str string to remove string from
+     * @param cstr string to remove
+     * @param all bool (if true, remove all occurences of the string)
+    */
+    extern void str_remove_string(string *str, cstring cstr, bool all);
+    /**
+     * @brief remove a char from a string from a specific index
+     * @param str string to remove char from
+     * @param c char to remove
+     * @param from ksize_t (index to start removing from)
+     * @param all bool (if true, remove all occurences of the char)
+    */
+    extern void str_remove_char_from(string *str, char c, ksize_t from, bool all);
+    /**
+     * @brief remove a string from a string from a specific index
+     * @param str string to remove string from
+     * @param cstr string to remove
+     * @param from ksize_t (index to start removing from)
+     * @param all bool (if true, remove all occurences of the string)
+    */
+    extern void str_remove_string_from(string *str, cstring cstr, ksize_t from, bool all);
 
 #endif
 
