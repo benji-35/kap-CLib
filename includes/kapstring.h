@@ -197,6 +197,37 @@ typedef struct text_s {
      * @brief check if string ends with a string
     */
     extern bool str_end_with(cstring str, cstring cstr);
+    /**
+     * @brief set string to lowercase
+    */
+    extern void str_to_lower(string str);
+    /**
+     * @brief set string to uppercase
+    */
+    extern void str_to_upper(string str);
+    /**
+     * @brief get a substring from a string
+     * @param str constant string
+     * @param from ksize_t (index to start from)
+     * @param to ksize_t (index to end at)
+     * @return string
+    */
+    extern string str_substring(cstring str, ksize_t from, ksize_t to);
+    /**
+     * @brief get a substring from a string from a specific index
+     * @param str constant string
+     * @param from ksize_t (index to start from)
+     * @return string
+    */
+    extern string str_substring_from(cstring str, ksize_t from);
+    /**
+     * @brief get a substring from a string to a specific index
+     * @param str constant string
+     * @param from ksize_t (index to end at)
+     * @param size ksize_t (size of the substring)
+     * @return string
+    */
+    extern string str_substring_size(cstring str, ksize_t from, ksize_t size);
 
 #endif
 

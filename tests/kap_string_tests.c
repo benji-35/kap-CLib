@@ -190,3 +190,35 @@ Test(string_tests, string_end_with_string) {
     bool result = str_end_with(str, "World!");
     cr_assert_eq(result, true, "Expected true, got %d", result);
 }
+
+// upper and lower tests
+Test(string_tests, string_to_upper) {
+    string str = str_create_string("Hello World!");
+    str_to_upper(str);
+    cr_assert_str_eq(str, "HELLO WORLD!", "Expected \"HELLO WORLD!\", got \"%s\"", str);
+}
+
+Test(string_tests, string_to_lower) {
+    string str = str_create_string("Hello World!");
+    str_to_lower(str);
+    cr_assert_str_eq(str, "hello world!", "Expected \"hello world!\", got \"%s\"", str);
+}
+
+//substring
+Test(string_tests, string_substring) {
+    string str = str_create_string("Hello World!");
+    string sub = str_substring(str, 6, 10);
+    cr_assert_str_eq(sub, "World", "Expected \"World\", got \"%s\"", sub);
+}
+
+Test(string_tests, string_substring_from) {
+    string str = str_create_string("Hello World!");
+    string sub = str_substring_from(str, 6);
+    cr_assert_str_eq(sub, "World!", "Expected \"World!\", got \"%s\"", sub);
+}
+
+Test(string_tests, string_substring_size) {
+    string str = str_create_string("Hello World!");
+    string sub = str_substring_size(str, 6, 5);
+    cr_assert_str_eq(sub, "World", "Expected \"World\", got \"%s\"", sub);
+}
