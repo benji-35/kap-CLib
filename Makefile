@@ -6,7 +6,7 @@
 ##
 
 include ./includes/Makefile
-include ./src/string/Makefile
+include ./src/Makefile
 include ./tests/Makefile
 
 NAME = libkap.a
@@ -20,20 +20,21 @@ all: $(NAME)
 	@$(GCC) -c $< -o $@ $(KAP_INCLUDES)
 	@echo "Kap C-Lib => $@ Compiling $<"
 
-$(NAME): $(OBJ_STRING)
-	@ar rc $(NAME) $(OBJ_STRING)
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ)
 
 build_tests: all $(OBJ_TESTS)
 	$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion --coverage
 	@echo "Kap C-Lib => $@ Compiling $<"
 
-run_tests: build_tests
+start_runnig_tests: build_tests
 	./kap_tests
 	gcovr -r . -e $(SRC_TESTS)
-	fclean
+
+run_tests: build_tests start_runnig_tests fclean
 
 clean:
-	@rm -f $(OBJ_STRING)
+	@rm -f $(OBJ)
 	@rm -f $(OBJ_TESTS)
 	@echo "Kap C-Lib => $@ Cleaning"
 

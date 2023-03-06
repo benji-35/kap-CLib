@@ -122,3 +122,9 @@ Test(string_tests, string_is_not_equal_ignore_case) {
     bool result = str_is_not_equal(str, "Hello WOrld!", false);
     cr_assert_eq(result, false, "Expected false, got %d", result);
 }
+
+Test(string_tests, string_is_equal_from) {
+    string str = str_create_string("Hello World!");
+    bool result = str_is_equal_from(str, "World!", 6, true);
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
