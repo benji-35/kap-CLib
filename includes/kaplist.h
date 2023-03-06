@@ -9,26 +9,28 @@
     #define KAPLIST_H_
 
     #include "kaptools.h"
+    #include "kapmemory.h"
 
-    typedef struct node_s {
+    typedef struct list_node_s {
         void *data;
-        struct node_s *next;
-        struct node_s *prev;
-        struct node_s *head;
+        struct list_node_s *next;
+        struct list_node_s *prev;
+        struct list_node_s *head;
 
         void (*print)(void *data);
         bool (*equal)(void *data1, void *data2);
-    } node_t;
+        void (*destroy)(void *data);
+    } list_node_t;
 
-    #define foreach(list, node) for (node_t *node = list->head; node; node = node->next)
+    #define foreach(list, node) for (list_node_t *node = list->head; node; node = node->next)
 
     #ifndef KAPCHAINEDLIST_H_
         #define KAPCHAINEDLIST_H_
 
         typedef struct list_s {
             int size;
-            node_t *head;
-            node_t *tail;
+            list_node_t *head;
+            list_node_t *tail;
         } list_t;
 
         #ifndef KAPCHAINEDLIST_FUNC_H
@@ -50,5 +52,27 @@
 
     #endif
 
+    #ifndef KAPMAPLIST_H_
+    #define KAPMAPLIST_H_
+
+    typedef struct map_node_s {
+        void *key;
+        void *data;
+        struct map_node_s *next;
+        struct map_node_s *prev;
+        struct map_node_s *head;
+
+        void (*print)(void *data);
+        bool (*equal)(void *data1, void *data2);
+        void (*destroy)(void *data);
+    } map_node_t;
+
+    typedef struct map_s {
+        int size;
+        map_node_t *head;
+        map_node_t *tail;
+    } map_t;
+
+    #endif
 
 #endif /* !KAPLIST_H_ */

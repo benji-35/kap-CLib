@@ -6,6 +6,7 @@
 ##
 
 PATH_STRING = ./src/string/
+PATH_TEXT 	= ./src/string/text/
 
 SRC_STRING	=	$(PATH_STRING)string_add.c				\
 				$(PATH_STRING)string_check.c			\
@@ -21,5 +22,13 @@ SRC_STRING	=	$(PATH_STRING)string_add.c				\
 				$(PATH_STRING)string_end_with.c			\
 				$(PATH_STRING)string_transform.c		\
 				$(PATH_STRING)str_substring.c			\
+				$(PATH_STRING)string_split.c			\
+
+SRC_TEXT	=	$(PATH_TEXT)text_create.c				\
+				$(PATH_TEXT)text_add_line.c				\
+				$(PATH_TEXT)text_to_string.c			\
+
+SRC_STRING	+=	$(SRC_TEXT)
+
 
 OBJ_STRING	=	$(SRC_STRING:.c=.o)

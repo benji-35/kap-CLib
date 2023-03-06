@@ -9,7 +9,8 @@ PATH_ALL = ./src/
 
 include $(PATH_ALL)memory/Makefile
 include $(PATH_ALL)string/Makefile
+include $(PATH_ALL)list/Makefile
 
-SRC = $(SRC_MEMORY) $(SRC_STRING)
+SRC = $(SRC_MEMORY) $(SRC_STRING) $(SRC_LIST)
 
 OBJ = $(SRC:.c=.o)

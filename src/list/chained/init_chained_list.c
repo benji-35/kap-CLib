@@ -17,3 +17,21 @@ list_t *list_create(void) {
     list->size = 0;
     return list;
 }
+
+void list_destroy(list_t *list) {
+    if (list == NULL)
+        return;
+    list_node_t *node = list->head;
+    list_node_t *next = NULL;
+
+    while (node != NULL) {
+        next = node->next;
+        if (node->destroy != NULL)
+            node->destroy(node->data);
+        else
+            kapfree(node->data);
+        kapfree(node);
+        node = next;
+    }
+    kapfree(list);
+}

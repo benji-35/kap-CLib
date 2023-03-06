@@ -18,18 +18,18 @@ all: $(NAME)
 
 .c.o:
 	@$(GCC) -c $< -o $@ $(KAP_INCLUDES) -fprofile-arcs -ftest-coverage
-	@echo "Kap C-Lib => $@ Compiling $<"
+	@echo "[KAP C LIB] => $@ Compiling $<"
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 
 build_tests: all $(OBJ_TESTS)
 	$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion --coverage
-	@echo "Kap C-Lib => $@ Compiling $<"
+	@echo "[KAP C LIB] => $@ Compiling $<"
 
 start_runnig_tests: build_tests
 	clear
-	@(./kap_tests && gcovr -r . -e $(SRC_TESTS)) || echo -e "\nKap C-Lib => $@ \033[0;31mTests failed\033[39m"
+	@(./kap_tests && gcovr -r . -e $(SRC_TESTS)) || echo -e "\n[KAP C LIB] => $@ \033[0;31mTests failed\033[39m"
 
 run_tests: build_tests start_runnig_tests fclean
 
@@ -38,11 +38,11 @@ clean:
 	@rm -f $(OBJ_TESTS)
 	@find . -name "*.gcda" -type f -delete
 	@find . -name "*.gcno" -type f -delete
-	@echo "Kap C-Lib => $@ Cleaning"
+	@echo "[KAP C LIB] => $@ Cleaning"
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f kap_tests
-	@echo "Kap C-Lib => $@ Cleaning"
+	@echo "[KAP C LIB] => $@ Cleaning"
 
 re: fclean all

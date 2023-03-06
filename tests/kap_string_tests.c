@@ -37,7 +37,7 @@ Test(string_tests, string_add_char) {
 
 Test(string_tests, string_add_string) {
     string str = str_create_string("Hello");
-    str_add_string(&str, " World!");
+    str_add_str(&str, " World!");
     cr_assert_str_eq(str, "Hello World!", "Expected \"Hello World!\", got \"%s\"", str);
 }
 

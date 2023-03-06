@@ -21,7 +21,7 @@ void str_add_char(string *str, char c) {
     *str = new_str;
 }
 
-void str_add_string(string *str, cstring cstr) {
+void str_add_str(string *str, cstring cstr) {
     ksize_t size = str_len(*str);
     ksize_t size2 = str_len(cstr);
     string new_str = malloc(sizeof(char) * (size + size2 + 1));
