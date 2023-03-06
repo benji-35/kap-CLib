@@ -233,6 +233,18 @@
          * @brief split a string into a text from a string
         */
         extern text_t str_split_str(cstring str, cstring cstr);
+        /**
+         * @brief write a string to a file
+         * @param str constant string
+         * @param path constant string (path to write to)
+        */
+        extern void str_write(cstring str, cstring path);
+        /**
+         * @brief read a string from a file
+         * @param path constant string (path to read from)
+         * @return string
+        */
+       extern string str_read(cstring path);
     #endif
 
     #ifndef KAPSTRING_TEXT_H_
@@ -309,6 +321,18 @@
          * @note this function will return a string of all lines in the text
         */
         extern string text_to_string(ctext_t text);
+        /**
+         * @brief write a text to a file
+         * @param text text_t
+         * @param path constant string (path to write to)
+        */
+        extern void text_write(ctext_t text, cstring path);
+        /**
+         * @brief read a text from a file
+         * @param path constant string (path to read from)
+         * @return text_t
+        */
+        extern text_t text_read(cstring path);
 
     #endif
 

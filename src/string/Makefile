@@ -23,10 +23,12 @@ SRC_STRING	=	$(PATH_STRING)string_add.c				\
 				$(PATH_STRING)string_transform.c		\
 				$(PATH_STRING)str_substring.c			\
 				$(PATH_STRING)string_split.c			\
+				$(PATH_STRING)string_io.c				\
 
 SRC_TEXT	=	$(PATH_TEXT)text_create.c				\
 				$(PATH_TEXT)text_add_line.c				\
 				$(PATH_TEXT)text_to_string.c			\
+				$(PATH_TEXT)text_io.c					\
 
 SRC_STRING	+=	$(SRC_TEXT)
 

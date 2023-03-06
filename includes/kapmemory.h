@@ -14,4 +14,6 @@
     void kapfree(void *ptr);
     void *kapmalloc(size_t size);
 
+    #define kfree(ptr) kapfree(ptr)
+
 #endif /* !KAPMEMORY_H_ */
