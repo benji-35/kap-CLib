@@ -128,3 +128,27 @@ Test(string_tests, string_is_equal_from) {
     bool result = str_is_equal_from(str, "World!", 6, true);
     cr_assert_eq(result, true, "Expected true, got %d", result);
 }
+
+Test(string_tests, string_remove_char) {
+    string str = str_create_string("Hello World!");
+    str_remove_char(&str, 'o', true);
+    cr_assert_str_eq(str, "Hell Wrld!", "Expected \"Hell Wrld!\", got \"%s\"", str);
+}
+
+Test(string_tests, string_remove_string) {
+    string str = str_create_string("Hello World!");
+    str_remove_string(&str, "World", true);
+    cr_assert_str_eq(str, "Hello !", "Expected \"Hello !\", got \"%s\"", str);
+}
+
+Test(string_tests, string_remove_char_from) {
+    string str = str_create_string("Hello World!");
+    str_remove_char_from(&str, 'o', 5, true);
+    cr_assert_str_eq(str, "Hello Wrld!", "Expected \"Hello Wrld!\", got \"%s\"", str);
+}
+
+Test(string_tests, string_remove_string_from) {
+    string str = str_create_string("Hello World!");
+    str_remove_string_from(&str, "World", 6, true);
+    cr_assert_str_eq(str, "Hello !", "Expected \"Hello !\", got \"%s\"", str);
+}
