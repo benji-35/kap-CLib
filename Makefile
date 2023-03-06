@@ -30,6 +30,7 @@ build_tests: all $(OBJ_TESTS)
 run_tests: build_tests
 	./kap_tests
 	gcovr -r . -e $(SRC_TESTS)
+	fclean
 
 clean:
 	@rm -f $(OBJ_STRING)

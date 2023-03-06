@@ -101,13 +101,24 @@ Test(string_tests, string_is_not_empty) {
 
 Test(string_tests, string_is_equal) {
     string str = str_create_string("Hello World!");
-    bool result = str_is_equal(str, "Hello WorLd!", false);
+    bool result = str_is_equal(str, "Hello World!", true);
     cr_assert_eq(result, true, "Expected true, got %d", result);
 }
 
 Test(string_tests, string_is_not_equal) {
     string str = str_create_string("Hello World!");
-    bool result = str_is_not_equal(str, "Hello WOrld!", false);
+    bool result = str_is_not_equal(str, "Hello World!", true);
     cr_assert_eq(result, false, "Expected false, got %d", result);
 }
 
+Test(string_tests, string_is_equal_ignore_case) {
+    string str = str_create_string("Hello World!");
+    bool result = str_is_equal(str, "Hello WorLd!", false);
+    cr_assert_eq(result, true, "Expected true, got %d", result);
+}
+
+Test(string_tests, string_is_not_equal_ignore_case) {
+    string str = str_create_string("Hello World!");
+    bool result = str_is_not_equal(str, "Hello WOrld!", false);
+    cr_assert_eq(result, false, "Expected false, got %d", result);
+}
