@@ -54,3 +54,5 @@ dkms.conf
 # kap lib
 **kap_tests
 **libkap.a
+**.gcno
+**.gcda

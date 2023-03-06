@@ -17,7 +17,7 @@ GCC = gcc
 all: $(NAME)
 
 .c.o:
-	@$(GCC) -c $< -o $@ $(KAP_INCLUDES)
+	@$(GCC) -c $< -o $@ $(KAP_INCLUDES) -fprofile-arcs -ftest-coverage
 	@echo "Kap C-Lib => $@ Compiling $<"
 
 $(NAME): $(OBJ)
@@ -36,6 +36,8 @@ run_tests: build_tests start_runnig_tests fclean
 clean:
 	@rm -f $(OBJ)
 	@rm -f $(OBJ_TESTS)
+	@find . -name "*.gcda" -type f -delete
+	@find . -name "*.gcno" -type f -delete
 	@echo "Kap C-Lib => $@ Cleaning"
 
 fclean: clean
