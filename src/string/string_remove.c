@@ -60,3 +60,7 @@ void str_remove_string_from(string *str, cstring to_remove, ksize_t index, bool 
     kapfree(*str);
     *str = new_str;
 }
+
+void str_remove_char_at(string *str, ksize_t index) {
+    str_remove_char_from(str, (*str)[index], index, false);
+}

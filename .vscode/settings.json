@@ -3,7 +3,10 @@
         "kapassert.h": "c",
         "kapmemory.h": "c",
         "text_add_line.C": "cpp",
-        "kaplist.h": "c"
+        "kaplist.h": "c",
+        "kaptools.h": "c",
+        "kapstring.h": "c",
+        "kapprintf.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

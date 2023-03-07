@@ -16,8 +16,25 @@
     #define kprintf(format, ...) kprintf_fd(FD_OUT, format, ##__VA_ARGS__)
     #define kprintf_err(format, ...) kprintf_fd(FD_ERR, format, ##__VA_ARGS__)
 
+    typedef struct {
+        map_t *functions;
+    } kprint_tool_t;
+
     #ifndef KAP_PRINTF_FUNCS
-        void kap_put_char(char c);
+        #define KAP_PRINTF_FUNCS
+
+        #define KPRINTF_FUNC void (*)(int fd, void * arg)
+        #define KPRINTF_FUNC_DATA void *
+        #define KPRINTF_FUNC_COUNT 5
+
+        kprint_tool_t kprint_init(void);
+
+        void kap_put_char(int fd, void *data);
+        void kap_put_int(int fd, void *data);
+        void kap_put_string(int fd, void *data);
+        void kap_put_hex(int fd, void *data);
+        void kap_put_bin(int fd, void *data);
+
     #endif
 
 

@@ -34,4 +34,16 @@
         #define ksize_t unsigned long
     #endif
 
+    #ifndef auto
+        #define auto __auto_type
+    #endif
+
+    #ifndef private
+        #define private static
+    #endif
+
+    #ifndef ABS
+        #define ABS(x) ((x) < 0 ? -(x) : (x))
+    #endif
+
 #endif /* !KAPTOOLS_H_ */

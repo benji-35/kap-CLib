@@ -55,9 +55,22 @@
         */
         extern void str_add_char(string *str, char c);
         /**
+         * @brief add char to string from index
+         * @param str string to add char to
+         * @param c char to add
+        */
+        extern void str_add_char_from(string *str, char c, ksize_t from);
+        /**
          * @brief add string to string
         */
         extern void str_add_str(string *str, cstring cstr);
+        /**
+         * @brief add string to string from index
+         * @param str string to add string to
+         * @param cstr string to add
+         * @param from ksize_t index
+        */
+        extern void str_add_str_from(string *str, cstring cstr, ksize_t from);
         /**
          * @brief check if string is empty
         */
@@ -148,6 +161,12 @@
         */
         extern void str_remove_char(string *str, char c, bool all);
         /**
+         * @brief remove a char at a specific index
+         * @param str string to remove char from
+         * @param index ksize_t (index of the char to remove)
+        */
+        extern void str_remove_char_at(string *str, ksize_t index);
+        /**
          * @brief remove a string from a string
          * @param str string to remove string from
          * @param cstr string to remove
@@ -185,7 +204,7 @@
         /**
          * @brief check if string starts with a string from a specific index
         */
-    bool str_start_with_from(cstring str, cstring start, ksize_t index);
+        bool str_start_with_from(cstring str, cstring start, ksize_t index);
         /**
          * @brief check if string ends with a char
         */
@@ -245,6 +264,34 @@
          * @return string
         */
        extern string str_read(cstring path);
+    #endif
+
+    #ifndef KAPSTRING_CALCULUS_H_
+        #define KAPSTRING_CALCULUS_H_
+
+        /**
+         * @brief get binary from a number
+         * @param nb int (number to convert)
+         * @return string (binary)
+         * @note this function will return a binary string from a number
+        */
+        extern string int_to_bin(int nb);
+
+        /**
+         * @brief get octal from a number
+         * @param nb int (number to convert)
+         * @return string (octal)
+         * @note this function will return a octal string from a number
+        */
+        extern string int_to_oct(int nb);
+
+        /**
+         * @brief get hexadecimal from a number
+         * @param nb int (number to convert)
+         * @return string (hexadecimal)
+         * @note this function will return a hexadecimal string from a number
+        */
+        extern string int_to_hex(int nb);
     #endif
 
     #ifndef KAPSTRING_TEXT_H_
