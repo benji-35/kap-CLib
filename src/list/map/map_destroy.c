@@ -8,15 +8,15 @@
 #include "kaplist.h"
 #include "kapstring.h"
 
-void map_remove(map_t *map, char *key) {
+void map_remove(map_t *map, const char *key) {
     if (map == NULL || key == NULL)
         return;
-    list_node_t *node = map->head;
-    list_node_t *next = NULL;
+    map_node_t *node = map->head;
+    map_node_t *next = NULL;
 
     while (node != NULL) {
         next = node->next;
-        if (str_is_equal(node->key, key)) {
+        if (str_is_equal(node->key, key, true)) {
             if (node->destroy != NULL)
                 node->destroy(node->data);
             else

@@ -92,27 +92,27 @@
              * @param data data of the element
              * @param can_overwrite if the key already exists, can we overwrite it ?
             */
-            extern void map_insert(map_t *map, char *key, void *data, bool can_overwrite);
+            extern void map_insert(map_t *map, const char *key, void *data, bool can_overwrite);
             /**
              * @brief Get the data of the element with the key
              * @param map map to get from
              * @param key key of the element
              * @return void* data of the element
             */
-            extern void *map_get(map_t *map, char *key);
+            extern void *map_get(map_t *map, const char *key);
             /**
              * @brief Check if the key exists in the map
              * @param map map to check in
              * @param key key to check
              * @return true if the key exists
             */
-            extern bool map_key_exists(map_t *map, char *key);
+            extern bool map_key_exists(map_t *map, const char *key);
             /**
              * @brief Remove the element with the key
              * @param map map to remove from
              * @param key key of the element
             */
-            extern void map_remove(map_t *map, char *key);
+            extern void map_remove(map_t *map, const char *key);
             /**
              * @brief Clear the map
              * @param map map to clear

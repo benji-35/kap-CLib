@@ -8,7 +8,7 @@
 #include "kaplist.h"
 
 list_t *list_create(void) {
-    list_t *list = calloc(sizeof(list_t));
+    list_t *list = calloc(1, sizeof(list_t));
 
     if (list == NULL)
         return NULL;
