@@ -8,8 +8,6 @@
 #ifndef KAPTOOLS_H_
     #define KAPTOOLS_H_
 
-    #include <stdlib.h>
-
     #ifndef NULL
         #define NULL ((void *)0)
     #endif
