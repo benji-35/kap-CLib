@@ -2,25 +2,24 @@
 ** KAP PROJECT, 2023
 ** C Lib
 ** File description:
-** init_chained_list
+** map_init
 */
 
 #include "kaplist.h"
 
-list_t *list_create(void) {
-    list_t *list = calloc(sizeof(list_t));
+map_t *map_create(void) {
+    map_t *map = malloc(sizeof(map_t));
 
-    if (list == NULL)
-        return NULL;
-    list->size = 0;
-    return list;
+    map->head = NULL;
+    map->tail = NULL;
+    return (map);
 }
 
-void list_destroy(list_t *list) {
-    if (list == NULL)
+void map_destroy(map_t *map) {
+    if (map == NULL)
         return;
-    list_node_t *node = list->head;
-    list_node_t *next = NULL;
+    map_node_t *node = map->head;
+    map_node_t *next = NULL;
 
     while (node != NULL) {
         next = node->next;
@@ -28,8 +27,9 @@ void list_destroy(list_t *list) {
             node->destroy(node->data);
         else
             kapfree(node->data);
+        kapfree(node->key),
         kapfree(node);
         node = next;
     }
-    kapfree(list);
+    kapfree(map);
 }
