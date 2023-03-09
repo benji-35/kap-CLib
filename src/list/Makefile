@@ -8,8 +8,11 @@
 PATH_CHAINED_LIST	=	./src/list/chained/
 PATH_MAP			=	./src/list/map/
 
-SRC_CHAINED_LIST	=	$(PATH_CHAINED_LIST)chained_push.c		\
-						$(PATH_CHAINED_LIST)init_chained_list.c	\
+SRC_CHAINED_LIST	=	$(PATH_CHAINED_LIST)chained_push.c			\
+						$(PATH_CHAINED_LIST)init_chained_list.c		\
+						$(PATH_CHAINED_LIST)list_get.c				\
+						$(PATH_CHAINED_LIST)list_pop.c				\
+						$(PATH_CHAINED_LIST)list_remove.c			\
 
 OBJ_CHAINED_LIST	=	$(SRC_CHAINED_LIST:.c=.o)
 

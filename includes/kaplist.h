@@ -36,17 +36,78 @@
         #ifndef KAPCHAINEDLIST_FUNC_H
             #define KAPCHAINEDLIST_FUNC_H
 
+            /**
+             * @brief Create a list
+            */
             list_t *list_create(void);
+            /**
+             * @brief Destroy a list
+             * @param list The list to destroy
+            */
             void list_destroy(list_t *list);
-            void list_push(list_t *list, void *data);
-            void list_push_front(list_t *list, void *data);
+
+            /**
+             * @brief Push an element in the list
+             * @param list The list to push in
+             * @param data The data to push
+            */
+            list_node_t *list_push(list_t *list, void *data);
+            /**
+             * @brief Push an element in the front of the list
+             * @param list The list to push in
+            */
+            list_node_t *list_push_front(list_t *list, void *data);
+            /**
+             * @brief Insert an element in the list
+             * @param list The list to insert in
+             * @param data The data to insert
+             * @param index The index to insert the data
+            */
+            list_node_t *list_insert(list_t *list, void *data, int index);
+
+            /**
+             * @brief Pop an element in the list
+             * @param list The list to pop in
+            */
             void list_pop(list_t *list);
+            /**
+             * @brief Pop an element in the front of the list
+             * @param list The list to pop in
+            */
             void list_pop_front(list_t *list);
-            void list_insert(list_t *list, void *data, int index);
+            /**
+             * @brief Remove an element in the list
+             * @param list The list to remove in
+            */
             void list_remove(list_t *list, int index);
+            /**
+             * @brief Remove an element in the list from the data equality
+             * @param list The list to remove in
+             * @param data The data to remove
+            */
             void list_remove_data(list_t *list, void *data);
+            /**
+             * @brief Clear the list
+             * @param list The list to clear
+            */
             void list_clear(list_t *list);
-            void list_print(list_t *list);
+
+            /**
+             * @brief Print the list
+            */
+            void list_print(const list_t *list);
+            /**
+             * @brief Get the data of the element at the index
+            */
+            void *list_get(const list_t *list, int index);
+            /**
+             * @brief Get the first element of the list
+            */
+            void *list_get_first(const list_t *list);
+            /**
+             * @brief Get the last element of the list
+            */
+            void *list_get_last(const list_t *list);
 
         #endif /* !KAPCHAINEDLIST_FUNC_H */
 
@@ -123,6 +184,16 @@
              * @param map map to print
             */
             extern void map_print(map_t *map);
+            /**
+             * @brief Get map size
+            */
+            extern ksize_t map_size(map_t *map);
+            /**
+             * @brief Get the key of the element at the index
+            */
+            extern char *map_get_key(map_t *map, ksize_t index);
+
+            #define map_add(map, key, data, can_overwrite) map_insert(map, key, data, can_overwrite)
         #endif
 
     #endif
