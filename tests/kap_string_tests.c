@@ -222,3 +222,10 @@ Test(string_tests, string_substring_size) {
     string sub = str_substring_size(str, 6, 5);
     cr_assert_str_eq(sub, "World", "Expected \"World\", got \"%s\"", sub);
 }
+
+//reverse
+Test(string_tests, string_reverse) {
+    string str = str_create_string("Hello World!");
+    str_reverse(str);
+    cr_assert_str_eq(str, "!dlroW olleH", "Expected \"!dlroW olleH\", got \"%s\"", str);
+}
