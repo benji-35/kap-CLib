@@ -8,6 +8,7 @@
 #include "kaptools.h"
 #include "kapstring.h"
 #include "kapmemory.h"
+#include "kapmath.h"
 
 private ksize_t size_nb(int nb) {
     ksize_t r = 0;

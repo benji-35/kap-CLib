@@ -278,6 +278,9 @@
          * @note this function will return a reversed copy of a string
         */
         extern string str_reverse_copy(cstring str);
+
+
+        #define str_length(str) strlen(str)
     #endif
 
     #ifndef KAPSTRING_CALCULUS_H_
