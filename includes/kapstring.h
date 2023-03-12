@@ -279,6 +279,23 @@
         */
         extern string str_reverse_copy(cstring str);
 
+        /**
+         * @brief replace a string with another string in string
+         * @param source string to replace in
+         * @param target string to replace
+         * @param replace string to replace with
+         * @return string (replaced string) allocated in another string
+         * @note this function will replace a string with another string in a string
+        */
+        extern string str_replace(cstring source, cstring target, cstring replace);
+
+        /**
+         * @brief clear a string
+         * @param str string to clear
+         * @note this function will clear a string
+        */
+        extern void str_clear(string *str);
+
 
         #define str_length(str) strlen(str)
     #endif

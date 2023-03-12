@@ -8,37 +8,28 @@
 #include "kapstring.h"
 
 text_t str_split(cstring str, char c) {
-    text_t text = text_create();
-    string tmp = str_create_empty();
-    int i = 0;
+    string tmp = str_create_char(c);
+    text_t text = str_split_str(str, tmp);
 
-    while (str[i] != '\0') {
-        if (str[i] == c) {
-            text_add_line(text, tmp);
-            tmp = str_create_empty();
-        } else
-            str_add_char(&tmp, str[i]);
-        i++;
-    }
-    text_add_line(text, tmp);
+    kfree(tmp);
     return (text);
 }
 
 text_t str_split_str(cstring str, cstring c) {
     text_t text = text_create();
     string tmp = str_create_empty();
-    int i = 0;
-
-    while (str[i] != '\0') {
-        if (str_start_with_from(&str[i], c, i)) {
+    
+    for (ksize_t i = 0; i < str_len(str); i++) {
+        if (str_start_with_from(str, c, i)) {
             text_add_line(text, tmp);
-            tmp = str_create_empty();
-            i += str_len(c);
+            str_clear(&tmp);
+            i += str_len(c) - 1;
+            continue;
         } else {
             str_add_char(&tmp, str[i]);
-            i++;
         }
-        i++;
     }
+    text_add_line(text, tmp);
+    kfree(tmp);
     return (text);
 }

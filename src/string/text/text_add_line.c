@@ -8,7 +8,7 @@
 #include "kapstring.h"
 
 void text_add_line(text_t text, char *line) {
-    list_push(text, line);
+    list_push(text, str_copy(line));
 }
 
 void text_add_lines_at(text_t text, string *lines, ksize_t index) {

@@ -25,6 +25,8 @@ SRC_STRING	=	$(PATH_STRING)string_add.c					\
 				$(PATH_STRING)string_split.c				\
 				$(PATH_STRING)string_io.c					\
 				$(PATH_STRING)string_reverse.c				\
+				$(PATH_STRING)string_replace.c				\
+				$(PATH_STRING)string_clear.c				\
 
 SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 				$(PATH_TEXT)text_add_line.c					\
