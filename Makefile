@@ -12,12 +12,14 @@ include ./tests/Makefile
 NAME = libkap.a
 GCC = gcc
 
+C_FLAGS = -fprofile-arcs -ftest-coverage -Wnonnull -g
+
 .Phony: all clean fclean re run_tests
 
 all: $(NAME)
 
 .c.o:
-	@$(GCC) -c $< -o $@ $(KAP_INCLUDES) -fprofile-arcs -ftest-coverage
+	@$(GCC) -c $< -o $@ $(KAP_INCLUDES) $(C_FLAGS)
 	@echo "[KAP C LIB] => $@ Compiling $<"
 
 $(NAME): $(OBJ)
