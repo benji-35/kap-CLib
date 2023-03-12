@@ -16,13 +16,14 @@ void __insert_map_node(map_t *map, const char *key, void *data) {
     node->key = str_copy(key);
     node->data = data;
     node->head = map->head;
-    if (map->head == NULL) {
+    node->prev = map->tail;
+    if (map->head == NULL)
         map->head = node;
+    if (map->tail != NULL)
+        map->tail->next = node;
+    else
         map->tail = node;
-        return;
-    }
-    map->head->prev = node;
-    map->head = node;
+    map->tail = node;
 }
 
 void map_insert(map_t *map, const char *key, void *data, bool can_replace) {
@@ -31,6 +32,8 @@ void map_insert(map_t *map, const char *key, void *data, bool can_replace) {
     void *old_data = map_get(map, key);
     if (old_data != NULL && can_replace) {
         node->data = data;
+        return;
+    } else if (old_data != NULL && !can_replace) {
         return;
     }
     __insert_map_node(map, key, data);
