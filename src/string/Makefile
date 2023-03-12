@@ -24,14 +24,16 @@ SRC_STRING	=	$(PATH_STRING)string_add.c					\
 				$(PATH_STRING)str_substring.c				\
 				$(PATH_STRING)string_split.c				\
 				$(PATH_STRING)string_io.c					\
+				$(PATH_STRING)string_reverse.c				\
 
 SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 				$(PATH_TEXT)text_add_line.c					\
 				$(PATH_TEXT)text_to_string.c				\
 				$(PATH_TEXT)text_io.c						\
 
-SRC_CALCUL_STR	=	$(PATH_STRING)/calcul/int_to_bin.c		\
-					$(PATH_STRING)/calcul/int_to_string.c	\
+SRC_CALCUL_STR	=	$(PATH_STRING)calcul/int_to_bin.c		\
+					$(PATH_STRING)calcul/int_to_hex.c		\
+					$(PATH_STRING)calcul/int_to_string.c	\
 
 SRC_STRING	+=	$(SRC_TEXT)
 SRC_STRING	+=	$(SRC_CALCUL_STR)

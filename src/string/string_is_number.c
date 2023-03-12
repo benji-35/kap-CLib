@@ -28,7 +28,6 @@ bool str_is_decimal(cstring str) {
 
 bool str_is_number(cstring str) {
     ksize_t i = 0;
-    bool dot = false;
 
     if (str == NULL)
         return false;

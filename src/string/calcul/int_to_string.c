@@ -9,8 +9,7 @@
 #include "kapstring.h"
 #include "kapmemory.h"
 
-static ksize_t size_nb(int nb)
-{
+private ksize_t size_nb(int nb) {
     ksize_t r = 0;
 
     nb = ABS(nb);
@@ -23,44 +22,25 @@ static ksize_t size_nb(int nb)
     return (r);
 }
 
-string int_to_str(int nb) {
+string int_to_str(const int nb) {
     bool is_neg = false;
     ksize_t size = size_nb(nb);
     string result = str_create_empty();
+    int nb_tmp = nb;
 
-    if (nb < 0) {
+    if (nb_tmp < 0) {
         is_neg = true;
-        nb = ABS(nb);
+        nb_tmp = ABS(nb_tmp);
     }
-    if (nb == 0) {
+    if (nb_tmp == 0) {
         kfree(result);
         return (str_create_char('0'));
     }
-    for (ksize_t i = size - 1; i >= 0; i--) {
-        str_add_char(&result, (nb % 10) + 48);
-        nb = nb / 10;
+    for (ksize_t i = size - 1; i > 0; i--) {
+        str_add_char(&result, (nb_tmp % 10) + 48);
+        nb_tmp = nb_tmp / 10;
     }
     if (is_neg)
         str_add_char_from(&result, '-', 0);
-    return (result);
-}
-
-string int_to_hex(int nb) {
-    string result = str_create_empty();
-    int i = 0;
-    int base = 16;
-
-    if (nb <= 0) {
-        kfree(result);
-        return (str_create_char('0'));
-    }
-    for (i = 0; base > 0; i++) {
-        if (nb >= base) {
-            str_add_char(&result, (nb / base) + 48);
-            nb -= base;
-        } else
-            str_add_char(&result, '0');
-        base /= 16;
-    }
     return (result);
 }
