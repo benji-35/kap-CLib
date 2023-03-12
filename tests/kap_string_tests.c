@@ -8,6 +8,7 @@
 #include <criterion/criterion.h>
 #include "kapstring.h"
 
+//create empty and create char tests
 Test (string_tests, string_create_empty) {
     string str = str_create_empty();
     cr_assert_str_eq(str, "", "Expected \"\", got \"%s\"", str);
@@ -23,6 +24,7 @@ Test(string_tests, string_create_string) {
     cr_assert_str_eq(str, "Hello World!", "Expected \"Hello World!\", got \"%s\"", str);
 }
 
+//add char and add string tests
 Test(string_tests, string_add_char) {
     string str = str_create_string("Hello");
     str_add_char(&str, ' ');
@@ -41,6 +43,7 @@ Test(string_tests, string_add_string) {
     cr_assert_str_eq(str, "Hello World!", "Expected \"Hello World!\", got \"%s\"", str);
 }
 
+//last index of char and last index of string tests
 Test(string_tests, string_last_index_of_char) {
     string str = str_create_string("Hello World!");
     ksize_t index = str_last_index_of_char(str, 'o');
@@ -53,6 +56,7 @@ Test(string_tests, string_last_index_of_string) {
     cr_assert_eq(index, 6, "Expected 6, got %d", index);
 }
 
+//contains char and contains string tests
 Test(string_tests, string_contains_char) {
     string str = str_create_string("Hello World!");
     cr_assert_eq(str_contains_char(str, 'o'), true, "Expected true, got %d", str_contains_char(str, 'o'));
@@ -63,6 +67,7 @@ Test(string_tests, string_contains_string) {
     cr_assert_eq(str_contains_string(str, "World"), true, "Expected true, got %d", str_contains_string(str, "World"));
 }
 
+//index of char and index of string tests
 Test(string_tests, string_index_of_char) {
     string str = str_create_string("Hello World!");
     ksize_t index = str_index_of_char(str, 'o');
@@ -87,6 +92,7 @@ Test(string_tests, string_index_of_string_from) {
     cr_assert_eq(index, 6, "Expected 6, got %d", index);
 }
 
+//is empty and is not empty tests
 Test(string_tests, string_is_empty) {
     string str = str_create_string("Hello World!");
     bool result = str_is_empty(str);
@@ -99,6 +105,7 @@ Test(string_tests, string_is_not_empty) {
     cr_assert_eq(result, true, "Expected true, got %d", result);
 }
 
+//equals and not equals tests
 Test(string_tests, string_is_equal) {
     string str = str_create_string("Hello World!");
     bool result = str_is_equal(str, "Hello World!", true);
@@ -129,6 +136,7 @@ Test(string_tests, string_is_equal_from) {
     cr_assert_eq(result, true, "Expected true, got %d", result);
 }
 
+//remove tests
 Test(string_tests, string_remove_char) {
     string str = str_create_string("Hello World!");
     str_remove_char(&str, 'o', true);
@@ -204,7 +212,7 @@ Test(string_tests, string_to_lower) {
     cr_assert_str_eq(str, "hello world!", "Expected \"hello world!\", got \"%s\"", str);
 }
 
-//substring
+//substring tests
 Test(string_tests, string_substring) {
     string str = str_create_string("Hello World!");
     string sub = str_substring(str, 6, 10);
@@ -223,9 +231,16 @@ Test(string_tests, string_substring_size) {
     cr_assert_str_eq(sub, "World", "Expected \"World\", got \"%s\"", sub);
 }
 
-//reverse
+//reverse tests
 Test(string_tests, string_reverse) {
     string str = str_create_string("Hello World!");
     str_reverse(str);
     cr_assert_str_eq(str, "!dlroW olleH", "Expected \"!dlroW olleH\", got \"%s\"", str);
+}
+
+//length tests
+Test(string_tests, string_length) {
+    string str = str_create_string("Hello World!");
+    size_t len = str_len(str);
+    cr_assert_eq(len, 12, "Expected 12, got %d", len);
 }
