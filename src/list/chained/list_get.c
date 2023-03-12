@@ -8,12 +8,12 @@
 #include "kaplist.h"
 #include <stdio.h>
 
-void *list_get(const list_t *list, int index) {
+void *list_get(const list_t *list, ksize_t index) {
     list_node_t *node = list->head;
 
-    if (index < 0 || index >= list->size)
+    if (index >= list->size)
         return (NULL);
-    for (int i = 0; i < index; i++) {
+    for (ksize_t i = 0; i < index; i++) {
         if (node == NULL)
             return (NULL);
         node = node->next;
@@ -41,7 +41,7 @@ void list_print(const list_t *list) {
         return;
     }
     printf("[");
-    for (int i = 0; i < list->size; i++) {
+    for (ksize_t i = 0; i < list->size; i++) {
         if (node->print != NULL)
             node->print(node->data);
         else

@@ -8,7 +8,7 @@
 #include "kaplist.h"
 
 list_node_t *list_push(list_t *list, void *data) {
-    list_node_t *node = malloc(sizeof(list_node_t));
+    list_node_t *node = calloc(1, sizeof(list_node_t));
 
     if (node == NULL)
         return NULL;
@@ -23,12 +23,15 @@ list_node_t *list_push(list_t *list, void *data) {
         list->head = node;
         node->head = node;
     }
+    node->destroy = NULL;
+    node->equal = NULL;
+    node->print = NULL;
     list->size++;
     return node;
 }
 
 list_node_t *list_push_front(list_t *list, void *data) {
-    list_node_t *node = malloc(sizeof(list_node_t));
+    list_node_t *node = calloc(1, sizeof(list_node_t));
 
     if (node == NULL)
         return NULL;
@@ -43,15 +46,18 @@ list_node_t *list_push_front(list_t *list, void *data) {
         list->tail = node;
         node->head = node;
     }
+    node->destroy = NULL;
+    node->equal = NULL;
+    node->print = NULL;
     list->size++;
     return node;
 }
 
 private list_node_t *manage_insert_node_chained(list_t *list,
-    list_node_t *node, int index) {
+    list_node_t *node, ksize_t index) {
     list_node_t *tmp = list->head;
 
-    for (int i = 0; i < index; i++)
+    for (ksize_t i = 0; i < index; i++)
         tmp = tmp->next;
     node->next = tmp;
     node->prev = tmp->prev;
@@ -62,15 +68,20 @@ private list_node_t *manage_insert_node_chained(list_t *list,
     return node;
 }
 
-list_node_t *list_insert(list_t *list, void *data, int index) {
-    list_node_t *node = malloc(sizeof(list_node_t));
+list_node_t *list_insert(list_t *list, void *data, ksize_t index) {
+    list_node_t *node = calloc(1, sizeof(list_node_t));
     if (node == NULL)
         return NULL;
     node->data = data;
-    if (index < 0 || index >= list->size) {
+    node->destroy = NULL;
+    node->equal = NULL;
+    node->print = NULL;
+    if (index >= list->size) {
+        kfree(node);
         return list_push(list, data);
     }
     if (index == 0) {
+        kfree(node);
         return list_push_front(list, data);
     }
     return manage_insert_node_chained(list, node, index);
