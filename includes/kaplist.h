@@ -22,8 +22,6 @@
         void (*destroy)(void *data);
     } list_node_t;
 
-    #define foreach(list, node) for (list_node_t *node = list->head; node; node = node->next)
-
     #ifndef KAPCHAINEDLIST_H_
         #define KAPCHAINEDLIST_H_
 
@@ -32,6 +30,9 @@
             list_node_t *head;
             list_node_t *tail;
         } list_t;
+
+        
+        #define foreach_l(list, node) for (list_node_t *node = list->head; node; node = node->next)
 
         #ifndef KAPCHAINEDLIST_FUNC_H
             #define KAPCHAINEDLIST_FUNC_H
@@ -170,6 +171,8 @@
             map_node_t *head;
             map_node_t *tail;
         } map_t;
+
+        #define foreach_m(map, node) for (map_node_t *node = map->head; node; node = node->next)
 
         #ifndef KAPMAPLIST_FUNC_H
             #define KAPMAPLIST_FUNC_H
