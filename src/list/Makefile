@@ -26,11 +26,7 @@ SRC_MAP	=	$(PATH_MAP)map_destroy.c		\
 			$(PATH_MAP)map_get_key.c		\
 			$(PATH_MAP)map_get_size.c		\
 
-SRC_ARRAY =	$(PATH_ARRAY)array_create.c		\
-			$(PATH_ARRAY)array_add.c		\
-
 SRC_LIST	=	$(SRC_CHAINED_LIST)
 SRC_LIST	+=	$(SRC_MAP)
-SRC_LIST	+=	$(SRC_ARRAY)
 
 OBJ_LIST	=	$(OBJ_CHAINED_LIST)

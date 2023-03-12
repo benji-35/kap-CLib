@@ -28,7 +28,7 @@
         #define KAPCHAINEDLIST_H_
 
         typedef struct list_s {
-            int size;
+            ksize_t size;
             list_node_t *head;
             list_node_t *tail;
         } list_t;
@@ -39,75 +39,113 @@
             /**
              * @brief Create a list
             */
-            list_t *list_create(void);
+            extern list_t *list_create(void);
             /**
              * @brief Destroy a list
              * @param list The list to destroy
             */
-            void list_destroy(list_t *list);
+            extern void list_destroy(list_t *list);
 
             /**
              * @brief Push an element in the list
              * @param list The list to push in
              * @param data The data to push
             */
-            list_node_t *list_push(list_t *list, void *data);
+            extern list_node_t *list_push(list_t *list, void *data);
             /**
              * @brief Push an element in the front of the list
              * @param list The list to push in
             */
-            list_node_t *list_push_front(list_t *list, void *data);
+            extern list_node_t *list_push_front(list_t *list, void *data);
             /**
              * @brief Insert an element in the list
              * @param list The list to insert in
              * @param data The data to insert
              * @param index The index to insert the data
             */
-            list_node_t *list_insert(list_t *list, void *data, int index);
+            extern list_node_t *list_insert(list_t *list, void *data, ksize_t index);
 
             /**
              * @brief Pop an element in the list
              * @param list The list to pop in
             */
-            void list_pop(list_t *list);
+            extern void list_pop(list_t *list);
             /**
              * @brief Pop an element in the front of the list
              * @param list The list to pop in
             */
-            void list_pop_front(list_t *list);
+            extern void list_pop_front(list_t *list);
             /**
              * @brief Remove an element in the list
              * @param list The list to remove in
             */
-            void list_remove(list_t *list, int index);
+            extern void list_remove(list_t *list, ksize_t index);
             /**
              * @brief Remove an element in the list from the data equality
              * @param list The list to remove in
              * @param data The data to remove
             */
-            void list_remove_data(list_t *list, void *data);
+            extern void list_remove_data(list_t *list, void *data);
             /**
              * @brief Clear the list
              * @param list The list to clear
             */
-            void list_clear(list_t *list);
+            extern void list_clear(list_t *list);
 
             /**
              * @brief Print the list
             */
-            void list_print(const list_t *list);
+            extern void list_print(const list_t *list);
             /**
              * @brief Get the data of the element at the index
             */
-            void *list_get(const list_t *list, int index);
+            extern void *list_get(const list_t *list, ksize_t index);
             /**
              * @brief Get the first element of the list
             */
-            void *list_get_first(const list_t *list);
+            extern void *list_get_first(const list_t *list);
             /**
              * @brief Get the last element of the list
             */
-            void *list_get_last(const list_t *list);
+            extern void *list_get_last(const list_t *list);
+
+            /**
+             * @brief Get the size of the list
+             * @param list The list to get the size
+            */
+            extern ksize_t list_size(const list_t *list);
+            /**
+             * @brief Check if the list is empty
+             * @param list The list to check
+            */
+            extern bool list_is_empty(const list_t *list);
+            /**
+             * @brief reverse the list
+             * @param list The list to reverse
+            */
+            extern void list_reverse(list_t *list);
+            /**
+             * @brief Sort the list
+             * @param list The list to sort
+             * @param compare The compare function
+            */
+            extern void list_sort(list_t *list, int (*cmp)(const void *, const void *));
+
+            /**
+             * @brief Concatenate two lists
+             * @param list1 The first list
+             * @param list2 The second list
+             * @return list_t* The new list with the two lists concatenated
+             * @note a new list is created
+            */
+           extern list_t *list_concat(const list_t *list1, const list_t *list2);
+            /**
+             * @brief Add a list to another list
+             * @param list1 The first list
+             * @param list2 The second list
+             * @note the second list is added to the first list
+            */
+           extern void list_add_list(list_t *list1, const list_t *list2);
 
         #endif /* !KAPCHAINEDLIST_FUNC_H */
 
