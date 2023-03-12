@@ -71,11 +71,17 @@ Test(kap_string_calcul_tests, int_to_hex4)
 Test(kap_string_calcul_tests, int_to_hex5)
 {
     string hex = int_to_hex(233);
-    cr_assert_str_eq(hex, "e9", "Expected e9, got %s", hex);
+    cr_assert_str_eq(hex, "E9", "Expected E9, got %s", hex);
 }
 
 Test(kap_string_calcul_tests, int_to_hex6)
 {
     string hex = int_to_hex(1024);
     cr_assert_str_eq(hex, "400", "Expected 400, got %s", hex);
+}
+
+Test(kap_string_calcul_tests, int_to_hex7)
+{
+    string hex = int_to_hex(1024 * 1024);
+    cr_assert_str_eq(hex, "100000", "Expected 100000, got %s", hex);
 }
