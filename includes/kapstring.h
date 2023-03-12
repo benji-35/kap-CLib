@@ -264,6 +264,20 @@
          * @return string
         */
        extern string str_read(cstring path);
+       /**
+        * @brief reverse a string
+        * @param str string to reverse
+        * @note this function will reverse a string
+       */
+        extern void str_reverse(string str);
+
+        /**
+         * @brief get a reversed copy of a string
+         * @param str constant string
+         * @return string
+         * @note this function will return a reversed copy of a string
+        */
+        extern string str_reverse_copy(cstring str);
     #endif
 
     #ifndef KAPSTRING_CALCULUS_H_
@@ -275,7 +289,7 @@
          * @return string (binary)
          * @note this function will return a binary string from a number
         */
-        extern string int_to_bin(int nb);
+        extern string int_to_bin(const int nb);
 
         /**
          * @brief get octal from a number
@@ -283,7 +297,7 @@
          * @return string (octal)
          * @note this function will return a octal string from a number
         */
-        extern string int_to_oct(int nb);
+        extern string int_to_oct(const int nb);
 
         /**
          * @brief get hexadecimal from a number
@@ -291,14 +305,35 @@
          * @return string (hexadecimal)
          * @note this function will return a hexadecimal string from a number
         */
-        extern string int_to_hex(int nb);
+        extern string int_to_hex(const int nb);
+
+        /**
+         * @brief int to string
+        */
+        extern string int_to_str(const int nb);
     #endif
 
     #ifndef KAPSTRING_TEXT_H_
         #define KAPSTRING_TEXT_H_
 
+        /**
+         * @brief create a text
+         * @return text_t
+         * @note this function will create a text
+        */
         extern text_t text_create(void);
+        /**
+         * @brief destroy a text
+         * @param text text_t
+         * @note this function will destroy a text
+        */
         extern void text_destroy(text_t text);
+        /**
+         * @brief add a line to a text
+         * @param text text_t
+         * @param line string (line to add)
+         * @note this function will add a line to a text
+        */
         extern void text_add_line(text_t text, string line);
         extern void text_add_lines_at(text_t text, string *lines, ksize_t index);
         extern void text_add_text(text_t text, ctext_t text2);
