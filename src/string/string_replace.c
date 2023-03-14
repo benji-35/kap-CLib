@@ -20,11 +20,11 @@ string str_replace(cstring source, cstring target, cstring replace) {
     }
     for (ksize_t i = 0; i < str_len(source); i++) {
         if (i == index) {
-            str_add_str(result, replace);
+            str_add_str(&result, replace);
             i += str_length(target) - 1;
             index = str_index_of_string_from(source, target, i + 1);
         } else
-            str_add_char(result, source[i]);
+            str_add_char(&result, source[i]);
     }
     return result;
 }

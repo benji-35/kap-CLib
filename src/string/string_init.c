@@ -35,5 +35,6 @@ string str_create_string(cstring cstr) {
     for (ksize_t i = 0; i < size; i++) {
         str[i] = cstr[i];
     }
+    str[size] = '\0';
     return str;
 }

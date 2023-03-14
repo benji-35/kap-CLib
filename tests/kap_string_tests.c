@@ -244,3 +244,45 @@ Test(string_tests, string_length) {
     size_t len = str_len(str);
     cr_assert_eq(len, 12, "Expected 12, got %d", len);
 }
+
+//get between
+Test(string_tests, string_get_between) {
+    string str = str_create_string("Hello World!");
+    string sub = str_value_between(str, "H", "!");
+    cr_assert_str_eq(sub, "ello World", "Expected \"ello World\", got \"%s\"", sub);
+}
+
+Test(string_tests, string_get_between_from) {
+    string str = str_create_string("Hello World!");
+    string sub = str_value_between(str, "W", "!");
+    cr_assert_str_eq(sub, "orld", "Expected \"orld\", got \"%s\"", sub);
+}
+
+//split str
+Test(string_tests, string_split) {
+    string str = str_create_string("Hello World!");
+    text_t split = str_split(str, ' ');
+    string line0 = text_get_line(split, 0);
+    string line1 = text_get_line(split, 1);
+
+    cr_assert_str_eq(line0, "Hello", "Expected \"Hello\", got \"%s\"", line0);
+    cr_assert_str_eq(line1, "World!", "Expected \"World!\", got \"%s\"", line1);
+}
+
+Test(string_tests, string_split_from) {
+    string str = str_create_string("Hello World!");
+    text_t split = str_split_str_from(str, " ", 6);
+    string line0 = text_get_line(split, 0);
+
+    cr_assert_str_eq(line0, "World!", "Expected \"World!\", got \"%s\"", line0);
+}
+
+Test(string_tests, string_split_str) {
+    string str = str_create_string("Hello World!");
+    text_t split = str_split_str(str, " ");
+    string line0 = text_get_line(split, 0);
+    string line1 = text_get_line(split, 1);
+
+    cr_assert_str_eq(line0, "Hello", "Expected \"Hello\", got \"%s\"", line0);
+    cr_assert_str_eq(line1, "World!", "Expected \"World!\", got \"%s\"", line1);
+}

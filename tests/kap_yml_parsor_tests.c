@@ -10,12 +10,13 @@
 
 
 Test(yaml_tests, yaml_opening) {
+    string path = "tests/configs/test_yaml.yml";
     yaml_f *yaml = yaml_open("tests/configs/test_yaml.yml");
     cr_assert_not_null(yaml, "Expected not null, got null");
     cr_assert_not_null(yaml->path, "Expected not null, got null");
     cr_assert_not_null(yaml->file_content, "Expected not null, got null");
     cr_assert_not_null(yaml->yaml, "Expected not null, got null");
-    cr_assert_str_eq(yaml->path, "tests/test.yml", "Expected \"tests/test.yml\", got \"%s\"", yaml->path);
+    cr_assert_str_eq(yaml->path, path, "Expected \"%s\", got \"%s\"", path, yaml->path);
 }
 
 Test(yaml_tests, yaml_getting_basic_value) {

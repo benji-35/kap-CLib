@@ -20,12 +20,6 @@ string str_copy(cstring src) {
 }
 
 string str_copy_to(string dest, cstring src) {
-    ksize_t size = str_len(src);
-
-    if (dest == NULL)
-        return NULL;
-    for (ksize_t i = 0; i < size; i++)
-        dest[i] = src[i];
-    dest[size] = '\0';
+    dest = str_copy(src);
     return dest;
 }

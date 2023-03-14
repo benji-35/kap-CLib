@@ -253,6 +253,15 @@
         */
         extern text_t str_split_str(cstring str, cstring cstr);
         /**
+         * @brief split a string into a text from a string from a specific index
+         * @param str constant string
+         * @param c constant string (string to split from)
+         * @param from ksize_t (index to start splitting from)
+         * @return text_t
+         * @note this function will split a string into a text from a string from a specific index
+        */
+        extern text_t str_split_str_from(cstring str, cstring c, ksize_t from);
+        /**
          * @brief write a string to a file
          * @param str constant string
          * @param path constant string (path to write to)
@@ -296,8 +305,18 @@
         */
         extern void str_clear(string *str);
 
+        /**
+         * @brief get a string between two strings
+         * @param str constant string
+         * @param start constant string (start string)
+         * @param end constant string (end string)
+         * @return string (string between two strings)
+         * @note this function will return a string between two strings
+        */
+        extern string str_value_between(cstring str, cstring start, cstring end);
 
-        #define str_length(str) strlen(str)
+
+        #define str_length(str) str_len(str)
     #endif
 
     #ifndef KAPSTRING_CALCULUS_H_
@@ -423,6 +442,14 @@
          * @note this function will return a string of all lines in the text
         */
         extern string text_to_string(ctext_t text);
+        /**
+         * @brief get string of all lines in text with a separator
+         * @param text text_t
+         * @param separator constant string (separator to use)
+         * @return string
+         * @note this function will return a string of all lines in the text with a separator
+        */
+        extern string text_to_string_separator(ctext_t text, cstring separator);
         /**
          * @brief write a text to a file
          * @param text text_t

@@ -16,10 +16,14 @@ text_t str_split(cstring str, char c) {
 }
 
 text_t str_split_str(cstring str, cstring c) {
+    return (str_split_str_from(str, c, 0));
+}
+
+text_t str_split_str_from(cstring str, cstring c, ksize_t from) {
     text_t text = text_create();
     string tmp = str_create_empty();
-    
-    for (ksize_t i = 0; i < str_len(str); i++) {
+
+    for (ksize_t i = from; i < str_len(str); i++) {
         if (str_start_with_from(str, c, i)) {
             text_add_line(text, tmp);
             str_clear(&tmp);
