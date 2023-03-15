@@ -72,6 +72,18 @@
         */
         extern void str_add_str_from(string *str, cstring cstr, ksize_t from);
         /**
+         * @brief add char at begin of string
+         * @param str string to add char to
+         * @param c char to add
+        */
+        extern void str_add_char_at_begin(string *str, char c);
+        /**
+         * @brief add string at begin of string
+         * @param str string to add string to
+         * @param cstr string to add
+        */
+        extern void str_add_str_at_begin(string *str, cstring cstr);
+        /**
          * @brief check if string is empty
         */
         extern bool str_is_empty(cstring str);
@@ -316,6 +328,20 @@
          * @note this function will return a string between two strings
         */
         extern string str_value_between(cstring str, cstring start, cstring end);
+        /**
+         * @brief get number of occurences of a char in a string
+         * @param str constant string
+         * @param c char (char to count)
+         * @return ksize_t (number of occurences)
+        */
+        extern ksize_t str_count_char(cstring str, char c);
+        /**
+         * @brief get number of occurences of a string in a string
+         * @param str constant string
+         * @param cstr constant string (string to count)
+         * @return ksize_t (number of occurences)
+        */
+        extern ksize_t str_count_str(cstring str, cstring cstr);
 
 
         #define str_length(str) str_len(str)
