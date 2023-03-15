@@ -6,6 +6,7 @@
 */
 
 #include "kapparser.h"
+#include <stdio.h>
 
 private ksize_t nb_parent(yaml_node_t *node) {
     ksize_t nb = 0;
@@ -30,12 +31,14 @@ private void add_keys_parent(yaml_node_t *node, list_t *list) {
 
 private void write_yml_line(text_t *txt, ksize_t line, yaml_node_t *node, ksize_t spaces) {
     string new_line = str_create_empty();
+    text_t keys = str_split(node->key, '.');
+    string key = text_get_line(keys, list_size(keys) - 1);
 
     while (spaces > 0) {
         str_add_char(&new_line, ' ');
         spaces--;
     }
-    str_add_str(&new_line, node->key);
+    str_add_str(&new_line, key);
     str_add_char(&new_line, ':');
     if (node->type == YML_STRING) {
         char limiter = '"';
@@ -54,16 +57,17 @@ private void write_yml_line(text_t *txt, ksize_t line, yaml_node_t *node, ksize_
         }
         str_add_str(&new_line, "]");
     }
+    printf("node %s, modification: %s\n", node->key, new_line);
     text_set_line(*txt, new_line, line);
+    text_destroy(keys);
     kfree(new_line);
 }
 
 private void apply_modifications(yaml_node_t *node, text_t *txt) {
-    text_t keys = text_create();
+    text_t keys = str_split(node->key, '.');
     ksize_t nb = nb_parent(node);
     ksize_t index_key = 0;
 
-    add_keys_parent(node, keys);
     for(ksize_t i = 0; i < ((text_t)*txt)->size; i++) {
         if (node->value == NULL || node->modified == false)
             break;
