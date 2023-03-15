@@ -195,6 +195,8 @@
         extern bool str_start_cwith(cstring str, char c);
         /**
          * @brief check if string starts with a string
+         * @param str constant string
+         * @param cstr string must be contains in str
         */
         extern bool str_start_with(cstring str, cstring cstr);
         /**
