@@ -185,6 +185,7 @@
             /**
              * @brief Destroy the map object
              * @param map map to destroy
+             * @note data is not destroyed unless you define a function to destroy the data
             */
             extern void map_destroy(map_t *map);
             /**
@@ -193,8 +194,10 @@
              * @param key key of the element
              * @param data data of the element
              * @param can_overwrite if the key already exists, can we overwrite it ?
+             * @note if the key already exists and can_overwrite is false, the element is not inserted
+             * @note if data is overwritten, the old data is destroyed only if you define a function to destroy the data
             */
-            extern void map_insert(map_t *map, const char *key, void *data, bool can_overwrite);
+            extern map_node_t *map_insert(map_t *map, const char *key, void *data, bool can_overwrite);
             /**
              * @brief Get the data of the element with the key
              * @param map map to get from
@@ -213,6 +216,7 @@
              * @brief Remove the element with the key
              * @param map map to remove from
              * @param key key of the element
+             * @note the data is destroyed only if you define a function to destroy the data
             */
             extern void map_remove(map_t *map, const char *key);
             /**
@@ -233,6 +237,13 @@
              * @brief Get the key of the element at the index
             */
             extern char *map_get_key(map_t *map, ksize_t index);
+            /**
+             * @brief create a map from two lists
+             * @param keys list of keys (only strings keys are supported)
+             * @param values list of values
+             * @return map_t* the new map
+            */
+           extern map_t *map_create_from_lists(list_t *keys, list_t *values);
 
             #define map_add(map, key, data, can_overwrite) map_insert(map, key, data, can_overwrite)
         #endif

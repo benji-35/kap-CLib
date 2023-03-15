@@ -19,8 +19,6 @@ private void remove_node_map(map_t *map, map_node_t *node) {
         map->tail = node->prev;
     if (node->destroy != NULL)
         node->destroy(node->data);
-    else
-        kapfree(node->data);
     kapfree(node->key);
     kapfree(node);
 }

@@ -6,6 +6,7 @@
 */
 
 #include "kaplist.h"
+#include "kapstring.h"
 
 map_t *map_create(void) {
     map_t *map = malloc(sizeof(map_t));
@@ -25,11 +26,23 @@ void map_destroy(map_t *map) {
         next = node->next;
         if (node->destroy != NULL)
             node->destroy(node->data);
-        else
-            kapfree(node->data);
         kapfree(node->key),
         kapfree(node);
         node = next;
     }
     kapfree(map);
+}
+
+map_t *map_create_from_lists(list_t *keys, list_t *values) {
+    map_t *map = map_create();
+
+    if (keys->size != values->size) {
+        map_destroy(map);
+        return (NULL);
+    }
+
+    for(ksize_t i = 0; i < keys->size; i++) {
+        map_insert(map, (string)list_get(keys, i), list_get(values, i), true);
+    }
+    return (map);
 }

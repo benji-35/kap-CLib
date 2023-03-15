@@ -35,8 +35,6 @@ private void __modify_map_node(map_t *map, const char *key, void *data) {
         if (str_is_equal(node->key, key, true)) {
             if (node->destroy != NULL)
                 node->destroy(node->data);
-            else
-                kfree(node->data);
             node->data = data;
             return;
         }
@@ -45,12 +43,8 @@ private void __modify_map_node(map_t *map, const char *key, void *data) {
 }
 
 void map_insert(map_t *map, const char *key, void *data, bool can_replace) {
-    map_node_t *node = malloc(sizeof(map_node_t));
-    
-    if (map == NULL || key == NULL) {
-        kfree(node);
+    if (map == NULL || key == NULL)
         return;
-    }
     void *old_data = map_get(map, key);
     if (old_data != NULL && can_replace) {
         __modify_map_node(map, key, data);
