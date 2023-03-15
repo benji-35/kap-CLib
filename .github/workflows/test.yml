@@ -12,8 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: configure
-      run: sudo apt-get install libcriterion-dev
+      run: |
+        sudo apt-get install libcriterion-dev
+        pip install gcovr
+
     - name: make
       run: make build_tests
 
