@@ -26,8 +26,6 @@ void list_destroy(list_t *list) {
         next = node->next;
         if (node->destroy != NULL)
             node->destroy(node->data);
-        else
-            kapfree(node->data);
         kapfree(node);
         node = next;
     }
