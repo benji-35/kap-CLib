@@ -15,4 +15,4 @@ jobs:
     - name: configure
       run: sudo apt-get install libcriterion-dev
     - name: make
-      run: run_tests
+      run: make run_tests
