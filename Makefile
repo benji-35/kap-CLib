@@ -14,7 +14,7 @@ GCC = gcc
 
 C_FLAGS = -fprofile-arcs -ftest-coverage -Wnonnull -g
 
-.Phony: all clean fclean re run_tests
+.Phony: all clean fclean re run_tests build_tests
 
 all: $(NAME)
 

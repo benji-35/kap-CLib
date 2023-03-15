@@ -15,4 +15,10 @@ jobs:
     - name: configure
       run: sudo apt-get install libcriterion-dev
     - name: make
-      run: make run_tests
+      run: make build_tests
+
+    - name: run unit tests
+      run: ./kap_tests
+    
+    - name: run gcovrage
+      run: gcovr -r . -e ./tests/*
