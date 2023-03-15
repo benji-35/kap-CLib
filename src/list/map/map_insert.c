@@ -10,11 +10,11 @@
 
 #include <stdio.h>
 
-private void __insert_map_node(map_t *map, const char *key, void *data) {
+private map_node_t *__insert_map_node(map_t *map, const char *key, void *data) {
     map_node_t *node = calloc(1, sizeof(map_node_t));
 
     if (node == NULL)
-        return;
+        return NULL;
     node->key = str_copy(key);
     node->data = data;
     node->head = map->head;
@@ -26,9 +26,10 @@ private void __insert_map_node(map_t *map, const char *key, void *data) {
     else
         map->tail = node;
     map->tail = node;
+    return node;
 }
 
-private void __modify_map_node(map_t *map, const char *key, void *data) {
+private map_node_t *__modify_map_node(map_t *map, const char *key, void *data) {
     map_node_t *node = map->head;
 
     while (node != NULL) {
@@ -36,21 +37,21 @@ private void __modify_map_node(map_t *map, const char *key, void *data) {
             if (node->destroy != NULL)
                 node->destroy(node->data);
             node->data = data;
-            return;
+            return node;
         }
         node = node->next;
     }
+    return NULL;
 }
 
-void map_insert(map_t *map, const char *key, void *data, bool can_replace) {
+map_node_t *map_insert(map_t *map, const char *key, void *data, bool can_replace) {
     if (map == NULL || key == NULL)
-        return;
+        return NULL;
     void *old_data = map_get(map, key);
     if (old_data != NULL && can_replace) {
-        __modify_map_node(map, key, data);
-        return;
+        return __modify_map_node(map, key, data);
     } else if (old_data != NULL && !can_replace) {
-        return;
+        return NULL;
     }
-    __insert_map_node(map, key, data);
+    return __insert_map_node(map, key, data);
 }
