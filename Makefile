@@ -30,7 +30,6 @@ build_tests: all $(OBJ_TESTS)
 	@echo "[KAP C LIB] => $@ Compiling $<"
 
 start_runnig_tests: build_tests
-	clear
 	@(./kap_tests && gcovr -r . -e $(SRC_TESTS)) || echo -e "\n[KAP C LIB] => $@ \033[0;31mTests failed\033[39m"
 
 run_tests: build_tests start_runnig_tests fclean
