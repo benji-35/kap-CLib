@@ -7,12 +7,29 @@
 
 #include "kapstring.h"
 
+private void equal_line_text(void *data1, void *data2) {
+    string str1 = (string) data1;
+    string str2 = (string) data2;
+
+    return str_is_equal(str1, str2, true);
+}
+
 void text_add_line(text_t text, char *line) {
-    list_push(text, str_copy(line));
+    list_node_t *node = list_push(text, str_copy(line));
+
+    if (node == NULL)
+        return;
+    node->destroy = &kapfree;
+    node->equal = &equal_line_text;
 }
 
 void text_add_lines_at(text_t text, string *lines, ksize_t index) {
-    list_insert(text, lines, index);
+    list_node_t *node = list_insert(text, lines, index);
+
+    if (node == NULL)
+        return;
+    node->destroy = &kapfree;
+    node->equal = &equal_line_text;
 }
 
 void text_add_text(text_t text, ctext_t text2) {
