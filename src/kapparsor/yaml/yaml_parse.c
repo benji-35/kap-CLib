@@ -75,6 +75,7 @@ private yaml_node_t *create_node_yml(text_t txt, ksize_t line, cstring key) {
     node->line = line;
     node->children = list_create();
     node->parent = NULL;
+    node->modified = false;
     look_for_value_yml(txt, line, &node->value, &node->type);
     return node;
 }

@@ -65,7 +65,7 @@ private void apply_modifications(yaml_node_t *node, text_t *txt) {
 
     add_keys_parent(node, keys);
     for(ksize_t i = 0; i < ((text_t)*txt)->size; i++) {
-        if (node->value == NULL)
+        if (node->value == NULL || node->modified == false)
             break;
         string line = text_get_line(*txt, i);
         ksize_t nb_spaces = str_count_char_from(line, ' ', 0);

@@ -62,6 +62,7 @@
             struct yaml_node_s *parent;
             ksize_t line;
             yml_content_data_t type;
+            bool modified;
         } yaml_node_t;
 
         typedef struct yaml_file_s {
