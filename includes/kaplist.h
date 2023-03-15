@@ -44,6 +44,7 @@
             /**
              * @brief Destroy a list
              * @param list The list to destroy
+             * @param destroy The function to destroy the data in the list only if the data has a destroy function
             */
             extern void list_destroy(list_t *list);
 
@@ -69,16 +70,20 @@
             /**
              * @brief Pop an element in the list
              * @param list The list to pop in
+             * @note The data will be destroyed if the data has a destroy function
             */
             extern void list_pop(list_t *list);
             /**
              * @brief Pop an element in the front of the list
              * @param list The list to pop in
+             * @note The data will be destroyed if the data has a destroy function
             */
             extern void list_pop_front(list_t *list);
             /**
              * @brief Remove an element in the list
              * @param list The list to remove in
+             * @param index The index to remove
+             * @note The data will be destroyed if the data has a destroy function
             */
             extern void list_remove(list_t *list, ksize_t index);
             /**

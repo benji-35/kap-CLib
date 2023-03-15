@@ -19,8 +19,6 @@ void list_remove(list_t *list, ksize_t index) {
     list->size--;
     if (tmp->destroy)
         tmp->destroy(tmp->data);
-    else
-        kfree(tmp->data);
     kfree(tmp);
 }
 

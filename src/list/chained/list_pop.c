@@ -19,8 +19,6 @@ void list_pop(list_t *list) {
     list->size--;
     if (node->destroy)
         node->destroy(node->data);
-    else
-        kfree(node->data);
     kfree(node);
 }
 
@@ -36,8 +34,6 @@ void list_pop_front(list_t *list) {
     list->size--;
     if (node->destroy)
         node->destroy(node->data);
-    else
-        kfree(node->data);
     kfree(node);
 }
 
