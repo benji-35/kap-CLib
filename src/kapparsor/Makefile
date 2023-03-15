@@ -20,6 +20,7 @@ SRC_YML	=	$(PATH_YML)yaml_init.c				\
 			$(PATH_YML)yaml_get.c				\
 			$(PATH_YML)yaml_find_first_node.c	\
 			$(PATH_YML)yaml_destroy_node.c		\
+			$(PATH_YML)yaml_set.c				\
 
 SRC_XML	=	$(PATH_XML)xml_open.c		\
 			$(PATH_XML)xml_parse.c		\

@@ -10,8 +10,8 @@
 void str_add_str_at_begin(string *str, cstring to_add) {
     string tmp = str_create_empty();
 
-    str_add_str(tmp, to_add);
-    str_add_str(tmp, *str);
+    str_add_str(&tmp, to_add);
+    str_add_str(&tmp, *str);
     kfree(*str);
     *str = tmp;
 }
@@ -19,8 +19,8 @@ void str_add_str_at_begin(string *str, cstring to_add) {
 void str_add_char_at_begin(string *str, char to_add) {
     string tmp = str_create_empty();
 
-    str_add_char(tmp, to_add);
-    str_add_str(tmp, *str);
+    str_add_char(&tmp, to_add);
+    str_add_str(&tmp, *str);
     kfree(*str);
     *str = tmp;
 }

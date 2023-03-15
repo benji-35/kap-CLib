@@ -202,6 +202,13 @@
         */
         extern void str_remove_string_from(string *str, cstring cstr, ksize_t from, bool all);
         /**
+         * @brief remove first chars from a string
+         * @param str string to remove chars from
+         * @param c char to remove
+         * @note remove all chars from the start of the string until the first char that is not c
+        */
+        extern void str_remove_first_chars(string *str, char c);
+        /**
          * @brief check if string starts with a char
         */
         extern bool str_start_cwith(cstring str, char c);

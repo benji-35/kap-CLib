@@ -30,6 +30,7 @@ SRC_STRING	=	$(PATH_STRING)string_add.c					\
 				$(PATH_STRING)string_get_between.c			\
 				$(PATH_STRING)string_count.c				\
 				$(PATH_STRING)strin_add_begin.c				\
+				$(PATH_STRING)string_remove_first_chars.c	\
 
 SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 				$(PATH_TEXT)text_add_line.c					\

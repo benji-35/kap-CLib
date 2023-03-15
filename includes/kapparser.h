@@ -80,12 +80,16 @@
         extern string yaml_get(yaml_f *yaml_file, cstring key);
         extern list_t *yaml_get_list(yaml_f *file, cstring key);
 
+        extern void yaml_set(yaml_f *file, cstring key, cstring value);
+        extern void yaml_set_list(yaml_f *file, cstring key, list_t *value);
+
         //yaml tools
         extern yaml_node_t *yaml_parser(yaml_f *, cstring key);
         extern yaml_node_t *yaml_key_exists(yaml_node_t *node, cstring key, string before);
         extern yaml_node_t *yaml_key_exists_file(yaml_f *file, cstring key);
         extern yaml_node_t *yaml_find_first_node(yaml_f *file, cstring key);
         extern void yaml_destroy_node(void *data);
+        extern void destroy_yml_data_node(yaml_node_t *yml_node);
 
         /**
          * @brief Convert config file to yaml file

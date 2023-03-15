@@ -153,10 +153,15 @@ private yaml_node_t *yaml_parse(yaml_f *file, cstring key) {
 
 yaml_node_t *yaml_parser(yaml_f *file, cstring key) {
     yaml_node_t *node = NULL;
+    string empty = str_create_empty();
+
     foreach_l(file->yaml, n) {
-        node = yaml_key_exists(n->data, key, str_create_empty());
-        if (node != NULL)
+        node = yaml_key_exists(n->data, key, empty);
+        if (node != NULL) {
+            kfree(empty);
             return node;
+        }
     }
+    kfree(empty);
     return yaml_parse(file, key);
 }
