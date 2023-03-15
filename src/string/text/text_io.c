@@ -7,9 +7,9 @@
 
 #include "kapstring.h"
 
-void text_write(ctext_t text, cstring path) {
+void text_write(ctext_t text, cstring path, bool append) {
     string str = text_to_string(text);
-    str_write(str, path);
+    str_write(str, path, append);
     kapfree(str);
 }
 

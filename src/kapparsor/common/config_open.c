@@ -70,6 +70,7 @@ void config_save(config_f *config) {
 }
 
 void config_close(config_f *config) {
+    config_save(config);
     if (config == NULL)
         return;
     switch (config->type) {

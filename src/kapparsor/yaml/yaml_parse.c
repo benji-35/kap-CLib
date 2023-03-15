@@ -10,18 +10,6 @@
 
 private yaml_node_t *yaml_parse(yaml_f *file, cstring key);
 
-private ksize_t nb_start_spaces(cstring str) {
-    ksize_t nb = 0;
-
-    for (ksize_t i = 0; i < str_len(str); i++) {
-        if (str[i] == ' ')
-            nb++;
-        else
-            break;
-    }
-    return nb;
-}
-
 private void look_for_value_yml(text_t txt, ksize_t line, void **value, yml_content_data_t *type) {
     string tmp_value = str_create_string(text_get_line(txt, line));
 
@@ -55,11 +43,11 @@ private void look_for_value_yml(text_t txt, ksize_t line, void **value, yml_cont
         kfree(delimiter);
         return;
     }
-    ksize_t nb_spaces = nb_start_spaces(text_get_line(txt, line));
+    ksize_t nb_spaces = str_count_char_from(text_get_line(txt, line), ' ', 0);
     nb_spaces += 2;
     line++;
     list_t *list = list_create();
-    while (nb_start_spaces(text_get_line(txt, line)) == nb_spaces) {
+    while (str_count_char_from(text_get_line(txt, line), ' ', 0) == nb_spaces) {
         if (!str_start_cwith_from(text_get_line(txt, line), '-', nb_spaces))
             break;
         list_node_t *node = list_push(list, str_create_string(text_get_line(txt, line) + nb_spaces + 2));
@@ -128,7 +116,7 @@ private yaml_node_t *yaml_parse(yaml_f *file, cstring key) {
 
     for (ksize_t i = 0; i < file->file_content->size; i++) {
         string line = text_get_line(file->file_content, i);
-        ksize_t nb_spaces = nb_start_spaces(line);
+        ksize_t nb_spaces = str_count_char_from(line, ' ', 0);
         string without_spaces = str_create_string(line + nb_spaces);
 
         if (nb_spaces == index_key * 2 && str_start_with(without_spaces, text_get_line(keys, index_key))) {
