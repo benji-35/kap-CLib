@@ -14,7 +14,7 @@ private void loop_krpintf(va_list args, \
     kprint_tool_t tool, cstring format, int fd) {
     string str = NULL;
 
-    for (int i = 0; i < str_len(format) ; i++) {
+    for (ksize_t i = 0; i < str_len(format) ; i++) {
         str = str_copy(&format[i]);
         if (format[i] == '%') {
             auto func = (KPRINTF_FUNC)map_get(tool.functions, &format[i + 1]);

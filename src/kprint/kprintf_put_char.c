@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 void kap_put_char(int fd, void *c) {
-    write(FD_OUT, (char *)c, 1);
+    write(fd, (char *)c, 1);
 }
 
 void kap_put_string(int fd, void *str) {
