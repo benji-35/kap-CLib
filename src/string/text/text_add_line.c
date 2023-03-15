@@ -7,7 +7,7 @@
 
 #include "kapstring.h"
 
-private void equal_line_text(void *data1, void *data2) {
+private bool equal_line_text(void *data1, void *data2) {
     string str1 = (string) data1;
     string str2 = (string) data2;
 
