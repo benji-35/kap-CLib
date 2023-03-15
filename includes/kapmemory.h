@@ -12,7 +12,7 @@
     #include <stdlib.h>
 
     void kapfree(void *ptr);
-    void *kapmalloc(size_t size);
+    void *kapmalloc(ksize_t size);
 
     #define kfree(ptr) kapfree(ptr)
 

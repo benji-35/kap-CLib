@@ -7,10 +7,10 @@
 
 #include "kapmemory.h"
 
-void *kapmalloc(size_t size) {
+void *kapmalloc(ksize_t size) {
     void *ptr = malloc(size);
 
     if (ptr == NULL)
-        return NULL;
+        exit(84);
     return ptr;
 }

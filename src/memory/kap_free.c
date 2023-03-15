@@ -6,6 +6,7 @@
 */
 
 #include "kapmemory.h"
+#include <stdlib.h>
 
 void kapfree(void *ptr) {
     if (ptr == NULL)
