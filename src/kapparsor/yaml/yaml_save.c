@@ -90,9 +90,8 @@ private void apply_modifications(yaml_node_t *node, text_t *txt) {
 }
 
 void yaml_save(yaml_f *yaml) {
-    if (yaml == NULL)
+    if (yaml == NULL || list_size(yaml->yaml) == 0)
         return;
-    //todo save yaml nodes
     foreach_l(yaml->yaml, node) {
         apply_modifications(node->data, &yaml->file_content);
     }
