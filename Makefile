@@ -26,13 +26,18 @@ $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 
 build_tests: all $(OBJ_TESTS)
-	$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion --coverage
-	@echo "[KAP C LIB] => $@ Compiling $<"
+	@$(GCC) -o kap_tests $(OBJ_TESTS) $(NAME) $(KAP_INCLUDES) -lcriterion --coverage
+	@echo "[KAP C LIB] =>\033[0;32m Building tests \033[0m"
+
+check_coverage:
+	@echo "[KAP C LIB] =>\033[0;32m Checking coverage \033[0m"
+	@gcovr -r . $(GCOVR_EXCLUDES)
 
 start_runnig_tests: build_tests
-	@(./kap_tests && gcovr -r . -e $(SRC_TESTS)) || echo -e "\n[KAP C LIB] => $@ \033[0;31mTests failed\033[39m"
+	@echo "[KAP C LIB] =>\033[0;32m Running tests \033[0m"
+	@./kap_tests
 
-run_tests: build_tests start_runnig_tests fclean
+run_tests: build_tests start_runnig_tests check_coverage fclean
 
 clean:
 	@rm -f $(OBJ)
