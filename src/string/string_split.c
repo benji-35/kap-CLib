@@ -23,6 +23,11 @@ text_t str_split_str_from(cstring str, cstring c, ksize_t from) {
     text_t text = text_create();
     string tmp = str_create_empty();
 
+    if (str == NULL || c == NULL) {
+        kfree(tmp);
+        text_destroy(text);
+        return (NULL);
+    }
     for (ksize_t i = from; i < str_len(str); i++) {
         if (str_start_with_from(str, c, i)) {
             text_add_line(text, tmp);
