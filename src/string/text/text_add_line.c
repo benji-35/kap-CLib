@@ -23,8 +23,8 @@ void text_add_line(text_t text, char *line) {
     node->equal = &equal_line_text;
 }
 
-void text_add_lines_at(text_t text, string *lines, ksize_t index) {
-    list_node_t *node = list_insert(text, lines, index);
+void text_add_line_at(text_t text, string lines, ksize_t index) {
+    list_node_t *node = list_insert(text, str_copy(lines), index);
 
     if (node == NULL)
         return;
