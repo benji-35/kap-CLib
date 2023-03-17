@@ -28,11 +28,17 @@ SRC_STRING	=	$(PATH_STRING)string_add.c					\
 				$(PATH_STRING)string_replace.c				\
 				$(PATH_STRING)string_clear.c				\
 				$(PATH_STRING)string_get_between.c			\
+				$(PATH_STRING)string_count.c				\
+				$(PATH_STRING)strin_add_begin.c				\
+				$(PATH_STRING)string_remove_first_chars.c	\
+				$(PATH_STRING)string_count_from.c			\
 
 SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 				$(PATH_TEXT)text_add_line.c					\
 				$(PATH_TEXT)text_to_string.c				\
 				$(PATH_TEXT)text_io.c						\
+				$(PATH_TEXT)text_set_line.c					\
+				$(PATH_TEXT)text_remove_line.c				\
 
 SRC_CALCUL_STR	=	$(PATH_STRING)calcul/int_to_bin.c		\
 					$(PATH_STRING)calcul/int_to_hex.c		\

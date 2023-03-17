@@ -15,8 +15,8 @@
     #ifndef bool
         #include <stdlib.h>
         #define bool char
-        #define true 1
-        #define false 0
+        #define true ((char)1)
+        #define false ((char)0)
 
         #define NEW_BOOL(value) ({bool *__retval__ = calloc(1, sizeof(bool)); *__retval__ = value; __retval__;})
     #endif

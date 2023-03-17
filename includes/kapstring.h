@@ -72,6 +72,18 @@
         */
         extern void str_add_str_from(string *str, cstring cstr, ksize_t from);
         /**
+         * @brief add char at begin of string
+         * @param str string to add char to
+         * @param c char to add
+        */
+        extern void str_add_char_at_begin(string *str, char c);
+        /**
+         * @brief add string at begin of string
+         * @param str string to add string to
+         * @param cstr string to add
+        */
+        extern void str_add_str_at_begin(string *str, cstring cstr);
+        /**
          * @brief check if string is empty
         */
         extern bool str_is_empty(cstring str);
@@ -190,11 +202,20 @@
         */
         extern void str_remove_string_from(string *str, cstring cstr, ksize_t from, bool all);
         /**
+         * @brief remove first chars from a string
+         * @param str string to remove chars from
+         * @param c char to remove
+         * @note remove all chars from the start of the string until the first char that is not c
+        */
+        extern void str_remove_first_chars(string *str, char c);
+        /**
          * @brief check if string starts with a char
         */
         extern bool str_start_cwith(cstring str, char c);
         /**
          * @brief check if string starts with a string
+         * @param str constant string
+         * @param cstr string must be contains in str
         */
         extern bool str_start_with(cstring str, cstring cstr);
         /**
@@ -265,8 +286,9 @@
          * @brief write a string to a file
          * @param str constant string
          * @param path constant string (path to write to)
+         * @param append bool (if true, append to the file)
         */
-        extern void str_write(cstring str, cstring path);
+        extern void str_write(cstring str, cstring path, bool append);
         /**
          * @brief read a string from a file
          * @param path constant string (path to read from)
@@ -314,6 +336,28 @@
          * @note this function will return a string between two strings
         */
         extern string str_value_between(cstring str, cstring start, cstring end);
+        /**
+         * @brief get number of occurences of a char in a string
+         * @param str constant string
+         * @param c char (char to count)
+         * @return ksize_t (number of occurences)
+        */
+        extern ksize_t str_count_char(cstring str, char c);
+        /**
+         * @brief get number of occurences of a string in a string
+         * @param str constant string
+         * @param cstr constant string (string to count)
+         * @return ksize_t (number of occurences)
+        */
+        extern ksize_t str_count_str(cstring str, cstring cstr);
+
+        /**
+         * @brief calculate number of same occurences of a char in a string from a specific index
+         * @param str constant string
+         * @param c char (char to count)
+         * @note count will stop when a different char is found
+        */
+        extern ksize_t str_count_char_from(cstring str, char c, ksize_t index);
 
 
         #define str_length(str) str_len(str)
@@ -374,7 +418,7 @@
          * @note this function will add a line to a text
         */
         extern void text_add_line(text_t text, string line);
-        extern void text_add_lines_at(text_t text, string *lines, ksize_t index);
+        extern void text_add_line_at(text_t text, string lines, ksize_t index);
         extern void text_add_text(text_t text, ctext_t text2);
         extern void text_add_text_at(text_t text, ctext_t text2, ksize_t index);
         /**
@@ -455,13 +499,21 @@
          * @param text text_t
          * @param path constant string (path to write to)
         */
-        extern void text_write(ctext_t text, cstring path);
+        extern void text_write(ctext_t text, cstring path, bool append);
         /**
          * @brief read a text from a file
          * @param path constant string (path to read from)
          * @return text_t
         */
         extern text_t text_read(cstring path);
+        /**
+         * @brief change a line in a text
+         * @param text text_t
+         * @param line string (line to change to)
+         * @param index ksize_t (index to change line from)
+         * @note this function will change the line at the index to the line. The past line will be deleted
+        */
+        extern void text_set_line(text_t text, cstring line, ksize_t index);
 
     #endif
 

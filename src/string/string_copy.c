@@ -11,6 +11,10 @@ string str_copy(cstring src) {
     ksize_t size = str_len(src);
     string dest = malloc(sizeof(char) * (size + 1));
 
+    if (src == NULL) {
+        kfree(dest);
+        return NULL;
+    }
     if (dest == NULL)
         return NULL;
     for (ksize_t i = 0; i < size; i++)

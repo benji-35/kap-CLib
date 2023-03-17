@@ -12,8 +12,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void str_write(cstring str, cstring path) {
-    int fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+void str_write(cstring str, cstring path, bool append) {
+    int fd = -1;
+    if (append) {
+        fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+    } else {
+        fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    }
 
     if (fd < 0)
         return;
@@ -27,6 +32,10 @@ string str_read(cstring path) {
     ssize_t rd;
     int fd = open(path, O_RDONLY, stat);
 
+    if (path == NULL) {
+        close(fd);
+        return (NULL);
+    }
     if (fd < 0)
         return (res);
     stat(path, &st);
