@@ -32,6 +32,10 @@ string str_read(cstring path) {
     ssize_t rd;
     int fd = open(path, O_RDONLY, stat);
 
+    if (path == NULL) {
+        close(fd);
+        return (NULL);
+    }
     if (fd < 0)
         return (res);
     stat(path, &st);
