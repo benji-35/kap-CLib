@@ -19,3 +19,66 @@ Test (text_tests, text_create_string) {
     cr_assert_eq(text->size, 2, "Expected 2, got %d", text->size);
 }
 
+Test(text_tests, text_remove_line_tst) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_line(text, 0);
+    cr_assert_eq(text->size, 1, "Expected 1, got %d", text->size);
+    string str = text_to_string(text);
+    cr_assert_str_eq(str, "World!", "Expected \"World!\", got \"%s\"", str);
+}
+
+Test(text_tests, text_remove_lines_tst) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines(text, 0, 1);
+    cr_assert_eq(text->size, 0, "Expected 0, got %d", text->size);
+}
+
+Test(text_tests, text_remove_lines_tst2) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines(text, 0, 2);
+    cr_assert_eq(text->size, 0, "Expected 0, got %d", text->size);
+}
+
+Test(text_tests, text_remove_lines_tst3) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines(text, 1, 2);
+    cr_assert_eq(text->size, 1, "Expected 1, got %d", text->size);
+    string str = text_to_string(text);
+    cr_assert_str_eq(str, "Hello", "Expected \"Hello\", got \"%s\"", str);
+}
+
+Test(text_tests, text_remove_lines_at_tst) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines_at(text, 0, 1);
+    cr_assert_eq(text->size, 1, "Expected 1, got %d", text->size);
+    string str = text_to_string(text);
+    cr_assert_str_eq(str, "World!", "Expected \"World!\", got \"%s\"", str);
+}
+
+Test(text_tests, text_remove_lines_at_tst2) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines_at(text, 0, 2);
+    cr_assert_eq(text->size, 0, "Expected 0, got %d", text->size);
+}
+
+Test(text_tests, text_remove_lines_from_tst) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines_from(text, 0);
+    cr_assert_eq(text->size, 0, "Expected 0, got %d", text->size);
+}
+
+Test(text_tests, text_remove_lines_from_tst2) {
+    text_t text = str_split("Hello World!", ' ');
+
+    text_remove_lines_from(text, 1);
+    cr_assert_eq(text->size, 1, "Expected 1, got %d", text->size);
+    string str = text_to_string(text);
+    cr_assert_str_eq(str, "Hello", "Expected \"Hello\", got \"%s\"", str);
+}
