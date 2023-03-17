@@ -38,6 +38,7 @@ SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 				$(PATH_TEXT)text_to_string.c				\
 				$(PATH_TEXT)text_io.c						\
 				$(PATH_TEXT)text_set_line.c					\
+				$(PATH_TEXT)text_remove_line.c				\
 
 SRC_CALCUL_STR	=	$(PATH_STRING)calcul/int_to_bin.c		\
 					$(PATH_STRING)calcul/int_to_hex.c		\
