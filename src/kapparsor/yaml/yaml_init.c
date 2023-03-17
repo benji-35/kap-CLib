@@ -21,5 +21,7 @@ void yaml_close(yaml_f *yaml) {
     kfree(yaml->path);
     text_destroy(yaml->file_content);
     list_destroy(yaml->yaml);
+    yaml->path = NULL;
+    yaml->file_content = NULL;
     kfree(yaml);
 }

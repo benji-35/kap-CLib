@@ -76,6 +76,7 @@ private yaml_node_t *create_node_yml(text_t txt, ksize_t line, cstring key) {
     node->children = list_create();
     node->parent = NULL;
     node->modified = false;
+    node->destroyed = false;
     look_for_value_yml(txt, line, &node->value, &node->type);
     return node;
 }
@@ -144,6 +145,10 @@ yaml_node_t *yaml_parser(yaml_f *file, cstring key) {
     yaml_node_t *node = NULL;
     string empty = str_create_empty();
 
+    if (file == NULL || key == NULL) {
+        kfree(empty);
+        return NULL;
+    }
     foreach_l(file->yaml, n) {
         node = yaml_key_exists(n->data, key, empty);
         if (node != NULL) {
@@ -152,5 +157,10 @@ yaml_node_t *yaml_parser(yaml_f *file, cstring key) {
         }
     }
     kfree(empty);
-    return yaml_parse(file, key);
+    node = yaml_parse(file, key);
+    if (node == NULL) {
+        node = create_node_yml(file->file_content, 0, key);
+        manage_node_parent(node, file, key);
+    }
+    return node;
 }

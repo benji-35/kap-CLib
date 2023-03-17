@@ -29,7 +29,7 @@ private void add_keys_parent(yaml_node_t *node, list_t *list) {
     list_push(list, node->key);
 }
 
-private void write_yml_line(text_t *txt, ksize_t line, yaml_node_t *node, ksize_t spaces) {
+private string get_string_yml_write(yaml_node_t *node, ksize_t spaces) {
     string new_line = str_create_empty();
     text_t keys = str_split(node->key, '.');
     string key = text_get_line(keys, list_size(keys) - 1);
@@ -57,20 +57,51 @@ private void write_yml_line(text_t *txt, ksize_t line, yaml_node_t *node, ksize_
         }
         str_add_str(&new_line, "]");
     }
-    printf("node %s, modification: %s\n", node->key, new_line);
-    text_set_line(*txt, new_line, line);
     text_destroy(keys);
+    return new_line;
+}
+
+private void write_yml_line(text_t *txt, ksize_t line, yaml_node_t *node, ksize_t spaces) {
+    string new_line = NULL;
+
+    if (node->modified == false)
+        return;
+    new_line = get_string_yml_write(node, spaces);
+    if (node->destroyed == true || node->value == NULL) {
+        text_remove_line(*txt, line);
+    } else {
+        text_set_line(*txt, new_line, line);
+    }
+    node->modified = false;
+    node->line = line;
     kfree(new_line);
+}
+
+private void create_new_lines_yml(text_t *txt, yaml_node_t *node, ksize_t spaces) {
+    ksize_t line = 0;
+
+    if (node->destroyed == true)
+        return;
+    if (node->parent != NULL) {
+        line = node->parent->line + 1;
+    } else {
+        line = ((text_t)*txt)->size;
+    }
+    text_add_line_at(*txt, "", line);
+    write_yml_line(txt, line, node, spaces);
 }
 
 private void apply_modifications(yaml_node_t *node, text_t *txt) {
     text_t keys = str_split(node->key, '.');
     ksize_t nb = nb_parent(node);
     ksize_t index_key = 0;
+    bool found = false;
 
     for(ksize_t i = 0; i < ((text_t)*txt)->size; i++) {
-        if (node->value == NULL || node->modified == false)
+        if (node->modified == false) {
+            found = true;
             break;
+        }
         string line = text_get_line(*txt, i);
         ksize_t nb_spaces = str_count_char_from(line, ' ', 0);
         string without_spaces = str_create_string(line + nb_spaces);
@@ -81,11 +112,15 @@ private void apply_modifications(yaml_node_t *node, text_t *txt) {
                 if (index_key == keys->size) {
                     write_yml_line(txt, i, node, nb_spaces);
                     kfree(without_spaces);
+                    found = true;
                     break;
                 }
             }
         }
         kfree(without_spaces);
+    }
+    if (found == false) {
+        create_new_lines_yml(txt, node, (keys->size - 1) * 2);
     }
     text_destroy(keys);
     foreach_l(node->children, child) {

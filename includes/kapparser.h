@@ -63,6 +63,7 @@
             ksize_t line;
             yml_content_data_t type;
             bool modified;
+            bool destroyed;
         } yaml_node_t;
 
         typedef struct yaml_file_s {
