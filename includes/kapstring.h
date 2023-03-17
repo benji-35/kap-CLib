@@ -418,7 +418,7 @@
          * @note this function will add a line to a text
         */
         extern void text_add_line(text_t text, string line);
-        extern void text_add_lines_at(text_t text, string *lines, ksize_t index);
+        extern void text_add_line_at(text_t text, string lines, ksize_t index);
         extern void text_add_text(text_t text, ctext_t text2);
         extern void text_add_text_at(text_t text, ctext_t text2, ksize_t index);
         /**
