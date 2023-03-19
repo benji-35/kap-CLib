@@ -30,10 +30,13 @@ private void open_config_type(config_f *config, cstring path) {
 config_f *config_open(cstring path) {
     config_f *config = malloc(sizeof(config_f));
     text_t pathes = str_split(path, '.');
-    string extension = text_get_line(pathes, pathes->size - 1);
-    
-    if (config == NULL || pathes->size == 0)
+
+    if (pathes == NULL || pathes->size == 0) {
+        kfree(config);
         return NULL;
+    }
+    string extension = text_get_line(pathes, pathes->size - 1);
+
     if (str_is_equal(extension, "yaml", true) || str_is_equal(extension, "yml", true))
         config->type = YAML;
     else if (str_is_equal(extension, "json", true))
@@ -52,6 +55,8 @@ config_f *config_open(cstring path) {
 }
 
 void config_save(config_f *config) {
+    if (config == NULL)
+        return;
     switch (config->type) {
         case YAML:
             yaml_save(config->file);

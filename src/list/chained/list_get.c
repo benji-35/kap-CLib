@@ -9,6 +9,8 @@
 #include <stdio.h>
 
 void *list_get(const list_t *list, ksize_t index) {
+    if (list == NULL)
+        return (NULL);
     list_node_t *node = list->head;
 
     if (index >= list->size)
@@ -22,18 +24,20 @@ void *list_get(const list_t *list, ksize_t index) {
 }
 
 void *list_get_first(const list_t *list) {
-    if (list->size == 0)
+    if (list == NULL || list->size == 0)
         return (NULL);
     return (list->head->data);
 }
 
 void *list_get_last(const list_t *list) {
-    if (list->size == 0)
+    if (list == NULL || list->size == 0)
         return (NULL);
     return (list->tail->data);
 }
 
 void list_print(const list_t *list) {
+    if (list == NULL)
+        return;
     list_node_t *node = list->head;
 
     if (list->size == 0) {

@@ -11,7 +11,7 @@
 yaml_node_t *yaml_key_exists(yaml_node_t *node, cstring key, string before) {
     string new_before = str_copy(before);
 
-    if (node == NULL) {
+    if (node == NULL || key == NULL || before == NULL || new_before == NULL) {
         kfree(before);
         return NULL;
     }
@@ -37,6 +37,10 @@ yaml_node_t *yaml_key_exists_file(yaml_f *file, cstring key) {
     yaml_node_t *node = NULL;
     string empty = str_create_empty();
 
+    if (file == NULL) {
+        kfree(empty);
+        return NULL;
+    }
     foreach_l(file->yaml, child) {
         node = yaml_key_exists(child->data, key, empty);
         if (node != NULL) {

@@ -145,7 +145,7 @@ yaml_node_t *yaml_parser(yaml_f *file, cstring key) {
     yaml_node_t *node = NULL;
     string empty = str_create_empty();
 
-    if (file == NULL || key == NULL) {
+    if (file == NULL || key == NULL || str_is_empty(key)) {
         kfree(empty);
         return NULL;
     }

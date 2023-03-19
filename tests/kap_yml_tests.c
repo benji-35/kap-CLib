@@ -59,6 +59,44 @@ Test(kap_yml_tests, get_list_value) {
     yaml_close(yml);
 }
 
+Test(kap_yml_tests, get_list_value_null) {
+    yaml_f *yml = yaml_open("./tests/configs/test_yaml.yml");
+    text_t list = yaml_get_list(yml, NULL);
+    text_t result = NULL;
+
+    cr_assert_eq(list, result, "Expected: %s, Got: %s", result, list);
+    yaml_close(yml);
+}
+
+Test(kap_yml_tests, get_list_value_null_file) {
+    text_t list = yaml_get_list(NULL, "no.file");
+    text_t result = NULL;
+
+    cr_assert_eq(list, result, "Expected: %s, Got: %s", result, list);
+}
+
+Test(kap_yml_tests, get_string_value_null_file) {
+    string list = yaml_get(NULL, "no.file");
+    string result = NULL;
+
+    cr_assert_eq(list, result, "Expected: %s, Got: %s", result, list);
+}
+
+Test(kap_yml_tests, get_list_value_null_node_destroyed) {
+    yaml_f *yml = yaml_open("./tests/configs/test_yaml.yml");
+    text_t result = NULL;
+
+    yaml_set(yml, "test.obj1.list", NULL);
+    text_t list = yaml_get_list(yml, "test.obj1.list");
+
+    cr_assert_eq(list, result, "Expected: %p, Got: %p", result, list);
+    yaml_close(yml);
+}
+
+Test(kap_yml_tests, destroy_node_null) {
+    yaml_destroy_node(NULL);
+}
+
 Test(kap_yml_tests, set_new_string_value) {
     yaml_f *yml = yaml_open("./tests/configs/test_yaml.yml");
     string str = "This is a test";
@@ -93,4 +131,27 @@ Test(kap_yml_tests, set_new_string_value_save_destroy) {
     string str4 = yaml_get(yml3, "test.test_value");
     cr_assert_eq(str4, NULL, "Expected: %s, Got: %s", NULL, str4);
     yaml_close(yml3);
+}
+
+Test(kap_yml_test, close_yaml_null) {
+    yaml_close(NULL);
+}
+
+Test(kap_yml_test, yaml_key_exists1) {
+    yaml_node_t *node = yaml_key_exists(NULL, "test", str_create_empty());
+    cr_assert_eq(node, NULL, "Expected: %p, Got: %p", NULL, node);
+}
+
+Test(kap_yml_test, yaml_key_exists_file1) {
+    yaml_node_t *node = yaml_key_exists_file(NULL, "test");
+    cr_assert_eq(node, NULL, "Expected: %p, Got: %p", NULL, node);
+}
+
+Test(kap_yml_test, yaml_key_exists_file2) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    string val = yaml_get(file, "test.value1");
+    yaml_node_t *node = yaml_key_exists_file(file, "test.value1");
+    yaml_close(file);
+
+    cr_assert_not_null(node);
 }
