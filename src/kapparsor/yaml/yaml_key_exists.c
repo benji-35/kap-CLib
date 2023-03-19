@@ -12,7 +12,7 @@ yaml_node_t *yaml_key_exists(yaml_node_t *node, cstring key, string before) {
     string new_before = str_copy(before);
 
     if (node == NULL || key == NULL || before == NULL || new_before == NULL) {
-        kfree(before);
+        kfree(new_before);
         return NULL;
     }
     if (str_len(new_before) > 0)
