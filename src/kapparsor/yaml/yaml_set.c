@@ -17,7 +17,6 @@ void yaml_set(yaml_f *file, cstring key, cstring value) {
     node->modified = true;
     if (value == NULL) {
         node->destroyed = true;
-        node->value = NULL;
     } else {
         node->destroyed = false;
         node->value = str_copy(value);

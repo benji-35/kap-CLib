@@ -8,6 +8,8 @@
 #include "kapparser.h"
 
 void destroy_yml_data_node(yaml_node_t *yml_node) {
+    if (yml_node == NULL || yml_node->value == NULL || yml_node->destroyed == true)
+        return;
     switch (yml_node->type) {
         case YML_STRING:
             kfree(yml_node->value);

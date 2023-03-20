@@ -12,6 +12,8 @@ yaml_f *yaml_open(cstring path) {
     yaml->path = str_copy(path);
     yaml->file_content = text_read(path);
     yaml->yaml = list_create();
+    yaml->line_read = 0;
+    yaml->last_added = NULL;
     return yaml;
 }
 

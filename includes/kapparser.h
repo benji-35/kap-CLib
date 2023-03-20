@@ -53,6 +53,8 @@
         typedef enum yml_content_data {
             YML_STRING,
             YML_LIST,
+            YML_OBJECT,
+            YML_CONTENT_DATA_MAX
         } yml_content_data_t;
 
         typedef struct yaml_node_s {
@@ -70,15 +72,18 @@
             string path;
             list_t *yaml;
             text_t file_content;
+            ksize_t line_read;
+            yaml_node_t *last_added;
         } yaml_file_t;
 
-        #define yaml_f yaml_file_t
+        typedef yaml_file_t yaml_f;
 
         extern yaml_f *yaml_open(cstring path);
         extern void yaml_close(yaml_f *yaml_file);
         extern void yaml_set(yaml_f *yaml_file, cstring key, cstring value);
         extern void yaml_save(yaml_f *yaml_file);
 
+        extern void *yaml_get_object(yaml_f *yaml_file, cstring key);
         extern string yaml_get(yaml_f *yaml_file, cstring key);
         extern list_t *yaml_get_list(yaml_f *file, cstring key);
 
@@ -130,16 +135,26 @@
     #ifndef KAP_XML
         #define KAP_XML
 
-        typedef struct xml_balise_s {
-            string name;
-            map_t *attributes;
-        } xml_balise_t;
+        typedef enum xml_reading_type {
+            XML_OPENING,
+            XML_CLOSING,
+            XML_COMMENT,
+            XML_DOCTYPE,
+            XML_SINGLE_TAG,
+            XML_MAX
+        } xml_reading_type_t;
+
+        typedef struct xml_reading_s {
+            xml_reading_type_t type;
+            string content;
+            string tag;
+        } xml_reading_t;
 
         typedef struct xml_node_s {
-            string name;
-            map_t *attributes;
-            list_t *children;
+            string tag_nanme;
             string content;
+            list_t *children;
+            map_t *attributes;
         } xml_node_t;
 
         typedef struct xml_file_s {
@@ -149,26 +164,16 @@
             string version;
             string encoding;
         } xml_file_t;
-        #define xml_f xml_file_t
+
+        typedef xml_file_t xml_f;
+        typedef list_t xml_node_list;
+        typedef xml_node_list node_list;
 
         extern xml_f *xml_open(cstring path);
         extern void xml_close(xml_f *xml_file);
-        extern void xml_save(xml_f *xml_file);
-
-        extern void xml_add_string(xml_f *xml_file, cstring path, cstring value);
-        extern void xml_add_list(xml_f *xml_file, cstring path, list_t *value);
-        extern void xml_add_attribute(xml_f *xml_file, cstring path, cstring attribute, cstring value);
-
-        extern string xml_get_string(xml_f *xml_file, cstring path);
-        extern list_t *xml_get_list(xml_f *xml_file, cstring path);
-        extern map_t *xml_get_attributes(xml_f *xml_file, cstring path);
-        extern string xml_get_attribute(xml_f *xml_file, cstring path, cstring attribute);
-        extern string xml_get_string_from_lang(xml_f *xml_file, cstring path, cstring lang);
 
         //tools
-        extern list_t *xml_parse(xml_f *xml);
-        extern void destroy_xml_node(void *data);
-        extern void xml_print_node(void *data);
+        extern xml_reading_t *xml_read_next(xml_f *xml_file, xml_node_t *parent, cstring line, ksize_t i);
 
         /**
          * @brief Convert config file to xml file
