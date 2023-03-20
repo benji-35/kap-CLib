@@ -51,6 +51,15 @@
         */
         extern string str_copy_to(string dest, cstring src);
         /**
+         * @brief copy a string into another from index to index
+         * @param src constant string to copy
+         * @param from ksize_t index
+         * @param to ksize_t index
+         * @return string
+         * @note if to is bigger than the length of the string, it will copy the string until the end
+        */
+        extern string str_copy_from_to(cstring src, ksize_t from, ksize_t to);
+        /**
          * @brief add char to string
         */
         extern void str_add_char(string *str, char c);
@@ -225,7 +234,7 @@
         /**
          * @brief check if string starts with a string from a specific index
         */
-        bool str_start_with_from(cstring str, cstring start, ksize_t index);
+        extern bool str_start_with_from(cstring str, cstring start, ksize_t index);
         /**
          * @brief check if string ends with a char
         */
