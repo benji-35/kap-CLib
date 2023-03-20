@@ -20,17 +20,15 @@ private void get_xml_intel(xml_f *xml) {
 }
 
 xml_f *xml_open(cstring path) {
-    xml_f *xml = malloc(sizeof(xml_f));
+    xml_f *xml = calloc(1, sizeof(xml_f));
 
-    // if (xml == NULL)
-    //     return NULL;
-    // xml->path = str_copy(path);
-    // xml->file_content = text_read(path);
-    // xml->xml = xml_parse(xml);
-    // get_xml_intel(xml);
-    // if (xml->version == NULL)
-    //     xml->version = str_copy("1.0");
-    // if (xml->encoding == NULL)
-    //     xml->encoding = str_copy("UTF-8");
+    if (path == NULL) {
+        kfree(xml);
+        return NULL;
+    }
+    if (xml == NULL)
+        return NULL;
+    xml->path = str_copy(path);
+    get_xml_intel(xml);
     return xml;
 }
