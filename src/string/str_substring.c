@@ -11,10 +11,12 @@ string str_substring(cstring str, ksize_t from, ksize_t to) {
     string new = str_create_empty();
     ksize_t len = str_len(str);
 
-    if (from > len || to >= len || from > to) {
+    if (from > len || from > to) {
         kfree(new);
         return NULL;
     }
+    if (to > len)
+        to = len;
     for (ksize_t i = from; i <= to; i++)
         str_add_char(&new, str[i]);
     return new;

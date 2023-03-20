@@ -8,22 +8,28 @@
 #include "kapstring.h"
 
 string str_copy(cstring src) {
-    ksize_t size = str_len(src);
-    string dest = malloc(sizeof(char) * (size + 1));
-
-    if (src == NULL) {
-        kfree(dest);
-        return NULL;
-    }
-    if (dest == NULL)
-        return NULL;
-    for (ksize_t i = 0; i < size; i++)
-        dest[i] = src[i];
-    dest[size] = '\0';
-    return dest;
+    return str_copy_from_to(src, 0, str_len(src));
 }
 
 string str_copy_to(string dest, cstring src) {
     dest = str_copy(src);
     return dest;
+}
+
+string str_copy_from_to(cstring src, ksize_t from, ksize_t to) {
+    string new_string = str_create_empty();
+    
+    if (src == NULL) {
+        kfree(new_string);
+        return NULL;
+    }
+    if (from > to || from >= str_len(src)) {
+        kfree(new_string);
+        return NULL;
+    }
+    if (to >= str_len(src))
+        to = str_len(src) - 1;
+    for (ksize_t i = from; i <= to; i++)
+        str_add_char(&new_string, src[i]);
+    return new_string;
 }
