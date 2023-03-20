@@ -99,11 +99,11 @@ Test(kap_yml_tests, destroy_node_null) {
 
 Test(kap_yml_tests, set_new_string_value) {
     yaml_f *yml = yaml_open("./tests/configs/test_yaml.yml");
-    string str = "This is a test";
     string result = "This is a test";
+    string path = "test.test_value";
 
-    yaml_set(yml, "test.test_value", str);
-    str = yaml_get(yml, "test.test_value");
+    yaml_set(yml, path, result);
+    string str = yaml_get(yml, path);
     cr_assert_str_eq(str, result, "Expected: %s, Got: %s", result, str);
     yaml_close(yml);
 }
@@ -151,7 +151,10 @@ Test(kap_yml_test, yaml_key_exists_file2) {
     yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
     string val = yaml_get(file, "test.value1");
     yaml_node_t *node = yaml_key_exists_file(file, "test.value1");
-    yaml_close(file);
 
+    string val_content = "This is a test";
+
+    cr_assert_str_eq(val, val_content, "Expected: %s, Got: %s", val_content, val);
     cr_assert_not_null(node);
+    yaml_close(file);
 }
