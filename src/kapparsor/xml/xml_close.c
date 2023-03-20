@@ -14,7 +14,7 @@ void destroy_xml_node(void *data) {
         return;
     xml_node_t *node = data;
 
-    kfree(node->name);
+    //kfree(node->name);
     kfree(node->content);
     map_destroy(node->attributes);
     list_destroy(node->children);
