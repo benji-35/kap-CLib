@@ -26,6 +26,7 @@ private string copy_without_spaces(cstring str) {
     string result = str_copy(str);
 
     str_remove_first_chars(&result, ' ');
+    str_remove_first_chars(&result, '\t');
     return result;
 }
 
@@ -127,6 +128,10 @@ private void xml_parse_from(xml_node_t *parent, xml_f *file, ksize_t line, ksize
         parent_list = parent->children;
     for (ksize_t i = line; i < max; i++) {
         string line_str = copy_without_spaces(text_get_line(file->file_content, i));
+        if (str_len(line_str) == 0) {
+            kfree(line_str);
+            continue;
+        }
         xml_node_t *node = xml_parse_node(file, line_str, &i);
         if (node != NULL) {
             list_node_t *lnd = list_push(parent_list, node);
