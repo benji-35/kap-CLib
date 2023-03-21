@@ -22,10 +22,11 @@ SRC_YML	=	$(PATH_YML)yaml_init.c				\
 			$(PATH_YML)yaml_destroy_node.c		\
 			$(PATH_YML)yaml_set.c				\
 
-SRC_XML	=	$(PATH_XML)xml_open.c		\
-			$(PATH_XML)xml_close.c		\
-			# $(PATH_XML)xml_parse.c		\
-			# $(PATH_XML)xml_print_node.c	\
+SRC_XML	=	$(PATH_XML)xml_open.c						\
+			$(PATH_XML)xml_close.c						\
+			$(PATH_XML)xml_get_element_attribute.c		\
+			$(PATH_XML)xml_parse.c						\
+			$(PATH_XML)xml_save.c						\
 
 SRC_PARSER	+=	$(SRC_YML)
 SRC_PARSER	+=	$(SRC_XML)
