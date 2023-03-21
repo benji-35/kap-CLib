@@ -30,5 +30,8 @@ xml_f *xml_open(cstring path) {
         return NULL;
     xml->path = str_copy(path);
     get_xml_intel(xml);
+    xml->file_content = text_open(path);
+    xml->xml = list_create();
+    xml_parse(xml);
     return xml;
 }
