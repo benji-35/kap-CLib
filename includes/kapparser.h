@@ -243,6 +243,41 @@
          * @note Do not forget to destroy the list
         */
         extern list_t *xml_get_element_attribute(xml_f *xml_file, cstring attribute, cstring value);
+        /**
+         * @brief Get xml element by tag from xml node
+         * @param xml_node xml node
+         * @param tag tag of the element
+         * @return list of xml nodes
+         * @note This function will return a list of xml nodes
+        */
+        extern list_t *xml_get_element_tag_from_node(xml_node_t *xml_node, cstring tag);
+        /**
+         * @brief Get xml element by attributes from xml node
+         * @param xml_node xml node
+         * @param attribute attribute of the element
+         * @param value value of the attribute (can be NULL to get all elements with the attribute)
+         * @return list of xml nodes
+        */
+        extern list_t *xml_get_element_attribute_from_node(xml_node_t *xml_node, cstring attribute, cstring value);
+
+        /**
+         * @brief add element to xml file
+         * @param xml_file xml file
+         * @param tag tag of the element
+         * @param content content of the element
+         * @param attributes attributes of the element
+         * @note This function will add an element to the xml file
+        */
+        extern void xml_add_element(xml_f *xml_file, cstring tag, cstring content, map_t *attributes);
+        /**
+         * @brief add element to xml node
+         * @param xml_node xml node
+         * @param tag tag of the element
+         * @param content content of the element
+         * @param attributes attributes of the element
+         * @note This function will add an element to the xml node
+        */
+        extern void xml_add_element_to_node(xml_node_t *xml_node, cstring tag, cstring content, map_t *attributes);
 
         //tools
         extern void xml_node_destroy(void *data);

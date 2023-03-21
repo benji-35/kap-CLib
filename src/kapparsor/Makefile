@@ -27,6 +27,8 @@ SRC_XML	=	$(PATH_XML)xml_open.c						\
 			$(PATH_XML)xml_get_element_attribute.c		\
 			$(PATH_XML)xml_parse.c						\
 			$(PATH_XML)xml_save.c						\
+			$(PATH_XML)xml_get_elem_tag.c				\
+			$(PATH_XML)xml_add.c						\
 
 SRC_PARSER	+=	$(SRC_YML)
 SRC_PARSER	+=	$(SRC_XML)
