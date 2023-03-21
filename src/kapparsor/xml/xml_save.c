@@ -20,15 +20,15 @@ private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
     }
     str_add_char(&line, '<');
     str_add_str(&line, parent->tag_name);
-    foreach_l(parent->attributes, attr) {
+    foreach_m(parent->attributes, attr) {
         char delim = '\"';
         str_add_char(&line, ' ');
         str_add_str(&line, attr->key);
         str_add_char(&line, '=');
-        if (str_contains_char(attr->value, '\"'))
+        if (str_contains_char(attr->data, '\"'))
             delim = '\'';
         str_add_char(&line, delim);
-        str_add_str(&line, attr->value);
+        str_add_str(&line, attr->data);
         str_add_char(&line, delim);
     }
     if ((parent->content == NULL || str_is_empty(parent->content)) && parent->children->size == 0) {
@@ -44,9 +44,12 @@ private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
     kfree(line);
     if (parent->content != NULL && !str_is_empty(parent->content)) {
         str_add_str(&content, parent->content);
-        text_add_line(&line, content);
+        text_add_line(text, content);
     }
-    rewrite_xml(text, parent->children, increment + 1);
+    foreach_l(parent->children, node) {
+        xml_node_t *xml_nd = (xml_node_t *)node->data;
+        rewrite_xml(text, xml_nd, increment + 1);
+    }
     text_add_line(text, end_balise);
     kfree(end_balise);
     kfree(content);
@@ -61,6 +64,6 @@ void xml_save(xml_f *xml) {
         xml_node_t *xml_nd = (xml_node_t *)node->data;
         rewrite_xml(txt, xml_nd, 0);
     }
-    text_write(xml->path, txt);
+    text_write(txt, xml->path, false);
     text_destroy(txt);
 }

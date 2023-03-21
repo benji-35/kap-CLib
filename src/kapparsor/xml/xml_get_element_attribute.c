@@ -64,7 +64,7 @@ private void search_xml_attr_from(xml_node_t *parent, xml_f *file, cstring attri
         xml_node_t *xml_nd = (xml_node_t *)node->data;
         if (can_add_attr_xml_search(xml_nd, attribute, value) == true)
             list_push(result, xml_nd);
-        search_xml_attr_from(xml_nd, file, attribute, result);
+        search_xml_attr_from(xml_nd, file, attribute, value, result);
     }
 }
 
