@@ -135,23 +135,8 @@
     #ifndef KAP_XML
         #define KAP_XML
 
-        typedef enum xml_reading_type {
-            XML_OPENING,
-            XML_CLOSING,
-            XML_COMMENT,
-            XML_DOCTYPE,
-            XML_SINGLE_TAG,
-            XML_MAX
-        } xml_reading_type_t;
-
-        typedef struct xml_reading_s {
-            xml_reading_type_t type;
-            string content;
-            string tag;
-        } xml_reading_t;
-
         typedef struct xml_node_s {
-            string tag_nanme;
+            string tag_name;
             string content;
             list_t *children;
             map_t *attributes;
@@ -171,9 +156,14 @@
 
         extern xml_f *xml_open(cstring path);
         extern void xml_close(xml_f *xml_file);
+        extern void xml_save(xml_f *xml);
+
+        extern list_t *xml_get_element_tag(xml_f *xml_file, cstring tag);
+        extern list_t *xml_get_element_attribute(xml_f *xml_file, cstring attribute, cstring value);
 
         //tools
-        extern xml_reading_t *xml_read_next(xml_f *xml_file, xml_node_t *parent, cstring line, ksize_t i);
+        extern void xml_node_destroy(void *data);
+        extern void xml_parse(xml_f *xml_file);
 
         /**
          * @brief Convert config file to xml file
