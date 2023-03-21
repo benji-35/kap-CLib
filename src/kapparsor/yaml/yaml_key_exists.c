@@ -11,8 +11,10 @@
 yaml_node_t *yaml_key_exists(yaml_node_t *node, cstring key, string before) {
     string new_before = str_copy(before);
 
+    if (node != NULL && new_before == NULL && str_len(before) == 0)
+        new_before = str_create_string(node->key);
     if (node == NULL || key == NULL || before == NULL || new_before == NULL) {
-        kfree(before);
+        kfree(new_before);
         return NULL;
     }
     if (str_len(new_before) > 0)
@@ -23,10 +25,10 @@ yaml_node_t *yaml_key_exists(yaml_node_t *node, cstring key, string before) {
         return node;
     }
     foreach_l(node->children, child) {
-        yaml_node_t *node = yaml_key_exists(child->data, key, before);
-        if (node != NULL) {
+        yaml_node_t *node_f = yaml_key_exists(child->data, key, before);
+        if (node_f != NULL) {
             kfree(new_before);
-            return node;
+            return node_f;
         }
     }
     kfree(new_before);

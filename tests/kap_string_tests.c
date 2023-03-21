@@ -286,3 +286,31 @@ Test(string_tests, string_split_str) {
     cr_assert_str_eq(line0, "Hello", "Expected \"Hello\", got \"%s\"", line0);
     cr_assert_str_eq(line1, "World!", "Expected \"World!\", got \"%s\"", line1);
 }
+
+//string copy
+Test(string_tests, string_copy) {
+    string str = str_create_string("Hello World!");
+    string copy = str_copy(str);
+    cr_assert_str_eq(copy, str, "Expected \"%s\", got \"%s\"", str, copy);
+}
+
+Test(string_tests, string_copy_from) {
+    string str = str_create_string("Hello World!");
+    string result = str_create_string("            ");
+
+    result = str_copy_to(result, str);
+    cr_assert_str_eq(result, str, "Expected \"%s\", got \"%s\"", str, result);
+}
+
+Test(string_tests, string_copy_from_to) {
+    string str = str_create_string("Hello World!");
+    string result = str_copy_from_to(str, 6, 10);
+
+    cr_assert_str_eq(result, "World", "Expected \"World\", got \"%s\"", result);
+}
+
+Test(string_tests, string_copy_from_to_null) {
+    string result = str_copy_from_to(NULL, 6, 10);
+    
+    cr_assert_null(result, "Expected NULL, got \"%s\"", result);
+}

@@ -9,6 +9,8 @@
 #include "kapstring.h"
 
 void *map_get(map_t *map, const char *key) {
+    if (map == NULL || key == NULL)
+        return (NULL);
     map_node_t *node = map->head;
 
     while (node != NULL) {

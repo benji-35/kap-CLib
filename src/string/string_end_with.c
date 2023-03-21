@@ -13,17 +13,17 @@ bool str_end_with(cstring str, cstring end) {
 
     if (len < len_end)
         return false;
-    for (ksize_t i = 0; i < len_end; i++) {
-        if (str[i + len - len_end] != end[i])
+    for (ksize_t i = len - len_end, j = 0; i < len; i++, j++) {
+        if (str[i] != end[j])
             return false;
     }
     return true;
 }
 
 bool str_end_cwith(cstring str, char c) {
-    ksize_t len = str_len(str);
+    string str_c = str_create_char(c);
+    bool result = str_end_with(str, str_c);
 
-    if (len == 0)
-        return false;
-    return str[len - 1] == c;
+    kapfree(str_c);
+    return result;
 }

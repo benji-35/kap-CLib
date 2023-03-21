@@ -13,11 +13,11 @@
     #endif
 
     #ifndef bool
-        #include <stdlib.h>
-        #define bool char
-        #define true ((char)1)
-        #define false ((char)0)
+        #define bool unsigned int
+        #define true 1
+        #define false 0
 
+        #include <stdlib.h>
         #define NEW_BOOL(value) ({bool *__retval__ = calloc(1, sizeof(bool)); *__retval__ = value; __retval__;})
     #endif
 
