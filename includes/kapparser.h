@@ -78,17 +78,66 @@
 
         typedef yaml_file_t yaml_f;
 
+        /**
+         * @brief Open yaml file
+         * @param path path to yaml file
+         * @return yaml file
+         * @note This function will open the yaml file
+         * @note Do not forget to close the file with yaml_close
+        */
         extern yaml_f *yaml_open(cstring path);
+        /**
+         * @brief Close yaml file
+         * @param yaml_file yaml file
+         * @note This function will not save the yaml file before closing it
+        */
         extern void yaml_close(yaml_f *yaml_file);
-        extern void yaml_set(yaml_f *yaml_file, cstring key, cstring value);
+        /**
+         * @brief Save yaml file
+         * @param yaml_file yaml file
+         * @note This function will save the yaml file
+        */
         extern void yaml_save(yaml_f *yaml_file);
 
+        /**
+         * @brief Set value to yaml file
+         * @param yaml_file yaml file
+         * @param key key to set
+         * @param value value to set
+         * @note This function will set the value to the key
+        */
+        extern void yaml_set(yaml_f *file, cstring key, cstring value);
+        /**
+         * @brief Set list to yaml file
+         * @param yaml_file yaml file
+         * @param key key to set
+         * @param value list to set
+         * @note This function will set the list to the key
+        */
+        extern void yaml_set_list(yaml_f *file, cstring key, list_t *value);
+    
+        /**
+         * @brief Get an object from yaml file
+         * @param yaml_file yaml file
+         * @param key key to get
+         * @return object
+         * @note This function will get the object from the key
+        */
         extern void *yaml_get_object(yaml_f *yaml_file, cstring key);
+        /**
+         * @brief Get a string from yaml file
+         * @param yaml_file yaml file
+         * @param key key to get
+        */
         extern string yaml_get(yaml_f *yaml_file, cstring key);
+        /**
+         * @brief Get a list from yaml file
+         * @param yaml_file yaml file
+         * @param key key to get
+         * @return list
+        */
         extern list_t *yaml_get_list(yaml_f *file, cstring key);
 
-        extern void yaml_set(yaml_f *file, cstring key, cstring value);
-        extern void yaml_set_list(yaml_f *file, cstring key, list_t *value);
 
         //yaml tools
         extern yaml_node_t *yaml_parser(yaml_f *, cstring key);
@@ -154,11 +203,45 @@
         typedef list_t xml_node_list;
         typedef xml_node_list node_list;
 
+        /**
+         * @brief Open xml file
+         * @param path path to xml file
+         * @return xml file
+         * @note This function will open the xml file
+         * @note Do not forget to close the xml file
+        */
         extern xml_f *xml_open(cstring path);
+        /**
+         * @brief Close xml file
+         * @param xml xml file
+         * @note This function will close the xml file
+        */
         extern void xml_close(xml_f *xml_file);
+        /**
+         * @brief Save xml file
+         * @param xml xml file
+         * @note This function will save the xml file
+        */
         extern void xml_save(xml_f *xml);
 
+        /**
+         * @brief Get xml element by tag (name of the element)
+         * @param xml_file xml file
+         * @param tag tag of the element
+         * @return list of xml nodes
+         * @note This function will return a list of xml nodes
+         * @note Do not forget to destroy the list
+        */
         extern list_t *xml_get_element_tag(xml_f *xml_file, cstring tag);
+        /**
+         * @brief Get xml element by attribute
+         * @param xml_file xml file
+         * @param attribute attribute of the element
+         * @param value value of the attribute (can be NULL to get all elements with the attribute)
+         * @return list of xml nodes
+         * @note This function will return a list of xml nodes
+         * @note Do not forget to destroy the list
+        */
         extern list_t *xml_get_element_attribute(xml_f *xml_file, cstring attribute, cstring value);
 
         //tools
@@ -183,7 +266,7 @@
          * @param xml_f xml file
          * @return true if xml file failed to load
         */
-        #define XML_FAILED(xml_f) ({ bool failed = false; if (xml_f == NULL || xml_f->file_content == NULL) { failed = true; } failed; })
+        #define XML_FAILED(xml_f) ({ bool failed = false; if (xml_f == NULL || xml_f->file_content == NULL || xml_f->encoding == NULL || xml_f->version == NULL) { failed = true; } failed; })
 
     #endif
 
