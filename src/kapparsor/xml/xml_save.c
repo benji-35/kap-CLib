@@ -7,6 +7,17 @@
 
 #include "kapparser.h"
 
+private void generate_xml_header(text_t txt, xml_f *xml_file) {
+    string header = str_create_string("<?xml version=\"");
+
+    str_add_str(&header, xml_file->version);
+    str_add_str(&header, "\" encoding=\"");
+    str_add_str(&header, xml_file->encoding);
+    str_add_str(&header, "\"?>");
+    text_add_line(txt, header);
+    kfree(header);
+}
+
 private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
     string line = str_create_empty();
     string end_balise = str_create_string("</");
@@ -17,6 +28,7 @@ private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
     for (ksize_t i = 0; i < increment; i++) {
         str_add_str(&line, "\t");
         str_add_str(&content, "\t");
+        str_add_str_at_begin(&end_balise, "\t");
     }
     str_add_char(&line, '<');
     str_add_str(&line, parent->tag_name);
@@ -60,6 +72,7 @@ void xml_save(xml_f *xml) {
         return;
     text_t txt = text_create();
 
+    generate_xml_header(txt, xml);
     foreach_l(xml->xml, node) {
         xml_node_t *xml_nd = (xml_node_t *)node->data;
         rewrite_xml(txt, xml_nd, 0);
