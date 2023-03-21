@@ -9,6 +9,11 @@
 
 yaml_f *yaml_open(cstring path) {
     yaml_f *yaml = calloc(1, sizeof(yaml_f));
+
+    if (path == NULL || yaml == NULL) {
+        kfree(yaml);
+        return NULL;
+    }
     yaml->path = str_copy(path);
     yaml->file_content = text_read(path);
     yaml->yaml = list_create();
