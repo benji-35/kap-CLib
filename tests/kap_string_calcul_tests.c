@@ -85,3 +85,40 @@ Test(kap_string_calcul_tests, int_to_hex7)
     string hex = int_to_hex(1024 * 1024);
     cr_assert_str_eq(hex, "100000", "Expected 100000, got %s", hex);
 }
+
+//int to str
+Test(kap_string_calcul_tests, int_to_string)
+{
+    string str = int_to_str(0);
+    cr_assert_str_eq(str, "0", "Expected 0, got %s", str);
+}
+
+Test(kap_string_calcul_tests, int_to_string2)
+{
+    string str = int_to_str(1);
+    cr_assert_str_eq(str, "1", "Expected 1, got %s", str);
+}
+
+Test(kap_string_calcul_tests, int_to_string3)
+{
+    string str = int_to_str(2);
+    cr_assert_str_eq(str, "2", "Expected 2, got %s", str);
+}
+
+Test(kap_string_calcul_tests, int_to_string4)
+{
+    string str = int_to_str(42);
+    cr_assert_str_eq(str, "42", "Expected 42, got %s", str);
+}
+
+Test(kap_string_calcul_tests, int_to_string5)
+{
+    string str = int_to_str(233);
+    cr_assert_str_eq(str, "233", "Expected 233, got %s", str);
+}
+
+Test(kap_string_calcul_tests, int_to_string6)
+{
+    string str = int_to_str(-45);
+    cr_assert_str_eq(str, "-45", "Expected -45, got %s", str);
+}
