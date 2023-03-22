@@ -41,6 +41,7 @@ string int_to_str(const int nb) {
         str_add_char(&result, (nb_tmp % 10) + 48);
         nb_tmp = nb_tmp / 10;
     }
+    str_add_char_at_begin(&result, nb_tmp + 48);
     if (is_neg)
         str_add_char_from(&result, '-', 0);
     return (result);
