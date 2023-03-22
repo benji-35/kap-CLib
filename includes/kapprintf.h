@@ -29,11 +29,12 @@
 
         kprint_tool_t kprint_init(void);
 
-        void kap_put_char(int fd, va_list *data);
-        void kap_put_int(int fd, va_list *data);
-        void kap_put_string(int fd, va_list *data);
-        void kap_put_hex(int fd, va_list *data);
-        void kap_put_bin(int fd, va_list *data);
+        extern void kap_put_char(int fd, va_list *data);
+        extern void kap_put_int(int fd, va_list *data);
+        extern void kap_put_string(int fd, va_list *data);
+        extern void kap_put_hex(int fd, va_list *data);
+        extern void kap_put_hex_low(int fd, va_list *data);
+        extern void kap_put_bin(int fd, va_list *data);
 
         extern void kprint_string(cstring str, int fd, int nb_spaces);
         extern void kprint_char(char c, int fd, int nb_spaces);
