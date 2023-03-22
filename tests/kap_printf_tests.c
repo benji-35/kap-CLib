@@ -28,6 +28,12 @@ Test(kap_printf, print_string, .init = redirect_all_stdout)
         cr_assert_stdout_eq_str("Hello world");
 }
 
+Test(kap_printf, print_string_null, .init = redirect_all_stdout)
+{
+        kprintf("Hello %s", NULL);
+        cr_assert_stdout_eq_str("Hello nil");
+}
+
 Test(kap_printf, print_int, .init = redirect_all_stdout)
 {
         kprintf("Hello %d", 42);
@@ -52,6 +58,18 @@ Test(kap_printf, print_binary, .init = redirect_all_stdout)
         cr_assert_stdout_eq_str("Hello 101010");
 }
 
+Test(kap_printf, print_percent, .init = redirect_all_stdout)
+{
+        kprintf("Hello %%");
+        cr_assert_stdout_eq_str("Hello %");
+}
+
+Test(kap_printf, print_unknown, .init = redirect_all_stdout)
+{
+        kprintf("Hello %z");
+        cr_assert_stdout_eq_str("Hello %z");
+}
+
 //test with spaces
 
 Test(kap_printf, print_char_space, .init = redirect_all_stdout)
@@ -69,6 +87,12 @@ Test(kap_printf, print_string_space, .init = redirect_all_stdout)
 Test(kap_printf, print_int_space, .init = redirect_all_stdout)
 {
         kprintf("Hello %5d", 42);
+        cr_assert_stdout_eq_str("Hello    42");
+}
+
+Test(kap_printf, print_int_space_star, .init = redirect_all_stdout)
+{
+        kprintf("Hello %*d", 5, 42);
         cr_assert_stdout_eq_str("Hello    42");
 }
 
@@ -90,6 +114,42 @@ Test(kap_printf, print_int_flag, .init = redirect_all_stdout)
 {
         kprintf("Hello %-5d", 42);
         cr_assert_stdout_eq_str("Hello 42   ");
+}
+
+Test(kap_printf, print_int_blank, .init = redirect_all_stdout)
+{
+        kprintf("Hello % d", 42);
+        cr_assert_stdout_eq_str("Hello  42");
+}
+
+Test(kap_printf, print_int_plus, .init = redirect_all_stdout)
+{
+        kprintf("Hello %+d", 42);
+        cr_assert_stdout_eq_str("Hello +42");
+}
+
+Test(kap_printf, print_hex_hash, .init = redirect_all_stdout)
+{
+        kprintf("Hello %#x", 42);
+        cr_assert_stdout_eq_str("Hello 0x2a");
+}
+
+Test(kap_printf, print_hex_upper_hash, .init = redirect_all_stdout)
+{
+        kprintf("Hello %#X", 42);
+        cr_assert_stdout_eq_str("Hello 0x2A");
+}
+
+Test(kap_printf, print_bin_hash, .init = redirect_all_stdout)
+{
+        kprintf("Hello %#b", 42);
+        cr_assert_stdout_eq_str("Hello 0b101010");
+}
+
+Test(kap_printf, print_int_0, .init = redirect_all_stdout)
+{
+        kprintf("Hello %05d", 42);
+        cr_assert_stdout_eq_str("Hello 00042");
 }
 
 //testing precision
