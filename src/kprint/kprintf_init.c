@@ -18,6 +18,7 @@ kprint_tool_t kprint_init(void) {
     map_insert(kprint_tool.functions, "x", &kap_put_hex_low, false);
     map_insert(kprint_tool.functions, "X", &kap_put_hex, false);
     map_insert(kprint_tool.functions, "b", &kap_put_bin, false);
+    map_insert(kprint_tool.functions, "%", &kap_put_percent, false);
 
     return kprint_tool;
 }
