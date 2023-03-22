@@ -59,7 +59,7 @@ private kprintf_info_t kprintf_info_init(cstring str, ksize_t *position, va_list
     } else
         info.precision = 0;
     if (info.minimum_field_width == 0 && info.precision > 0) {
-        info.flag |= KPRINTF_FLAG_SPACE;
+        info.flag |= KPRINTF_FLAG_ZERO;
         info.minimum_field_width = info.precision;
     }
     return (info);
@@ -90,7 +90,6 @@ private void loop_krpintf(va_list *args, \
                 kprint_string("%", fd, empty_info(), KPRINTF_TYPE_PRINT_STRING);
                 kprint_char(format[i], fd, empty_info());
             }
-            i++;
         } else
             kprint_char(format[i], fd, empty_info());
     }
