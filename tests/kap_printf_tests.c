@@ -51,3 +51,63 @@ Test(kap_printf, print_binary, .init = redirect_all_stdout)
         kprintf("Hello %b", 42);
         cr_assert_stdout_eq_str("Hello 101010");
 }
+
+//test with spaces
+
+Test(kap_printf, print_char_space, .init = redirect_all_stdout)
+{
+        kprintf("Hello %2c", 'c');
+        cr_assert_stdout_eq_str("Hello  c");
+}
+
+Test(kap_printf, print_string_space, .init = redirect_all_stdout)
+{
+        kprintf("Hello %10s", "world");
+        cr_assert_stdout_eq_str("Hello      world");
+}
+
+Test(kap_printf, print_int_space, .init = redirect_all_stdout)
+{
+        kprintf("Hello %5d", 42);
+        cr_assert_stdout_eq_str("Hello    42");
+}
+
+//testing flags
+
+Test(kap_printf, print_char_flag, .init = redirect_all_stdout)
+{
+        kprintf("Hello %-2c", 'c');
+        cr_assert_stdout_eq_str("Hello c ");
+}
+
+Test(kap_printf, print_string_flag, .init = redirect_all_stdout)
+{
+        kprintf("Hello %-10s", "world");
+        cr_assert_stdout_eq_str("Hello world     ");
+}
+
+Test(kap_printf, print_int_flag, .init = redirect_all_stdout)
+{
+        kprintf("Hello %-5d", 42);
+        cr_assert_stdout_eq_str("Hello 42   ");
+}
+
+//testing precision
+
+Test(kap_printf, print_string_precision, .init = redirect_all_stdout)
+{
+        kprintf("Hello %.5s", "world!");
+        cr_assert_stdout_eq_str("Hello world");
+}
+
+Test(kap_printf, print_int_precision, .init = redirect_all_stdout)
+{
+        kprintf("Hello %.5d", 42);
+        cr_assert_stdout_eq_str("Hello 00042");
+}
+
+Test(kap_printf, print_hexa_precision, .init = redirect_all_stdout)
+{
+        kprintf("Hello %.5x", 42);
+        cr_assert_stdout_eq_str("Hello 0002a");
+}
