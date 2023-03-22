@@ -19,7 +19,6 @@ void kap_put_hex_low(int fd, va_list *data, kprintf_info_t intel) {
 void kap_put_percent(int fd, va_list *data, kprintf_info_t intel) {
     intel.flag = KPRINTF_FLAG_NONE;
     intel.minimum_field_width = 0;
-    intel.period = 0;
     intel.precision = 0;
-    kprint_char('%', fd, intel, KPRINTF_TYPE_PRINT_PERCENT);
+    kprint_char('%', fd, intel);
 }

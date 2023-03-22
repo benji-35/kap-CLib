@@ -13,22 +13,25 @@
 void kprint_char(char c, int fd, kprintf_info_t intel) {
     string str = str_create_char(c);
 
-    kprint_string(str, fd, intel);
+    kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_CHAR);
     kfree(str);
 }
 
 void kprint_string(cstring str, int fd, kprintf_info_t intel, kprintf_type_t type) {
     string cpy = str_copy(str);
     ksize_t len = str_len(cpy);
+    char more = ' ';
 
     if (cpy == NULL)
-        cpy = str_create("nil");
+        cpy = str_create_string("nil");
+    if (intel.flag & KPRINTF_FLAG_SPACE)
+        more = '0';
     if (intel.minimum_field_width > 0) {
         for (int i = intel.minimum_field_width; i > len; i--) {
             if (intel.flag & KPRINTF_FLAG_MINUS) {
-                str_add_char_at_begin(&cpy, ' ');
-            } else {
                 str_add_char(&cpy, ' ');
+            } else {
+                str_add_char_at_begin(&cpy, more);
             }
         }
     }
@@ -57,9 +60,12 @@ void kap_put_string(int fd, va_list *data, kprintf_info_t intel) {
 void kap_put_int(int fd, va_list *data, kprintf_info_t intel) {
     int nb = va_arg(*data, int);
     string str = int_to_str(nb);
+    char more = ' ';
 
+    if (intel.flag & KPRINTF_FLAG_SPACE)
+        more = '0';
     if (intel.flag & KPRINTF_FLAG_SPACE && nb >= 0)
-        str_add_char_at_begin(&str, ' ');
+        str_add_char_at_begin(&str, more);
     if (intel.flag & KPRINTF_FLAG_PLUS && nb >= 0)
         str_add_char_at_begin(&str, '+');
     kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_INT);

@@ -48,15 +48,29 @@ private kprintf_flag_t check_flags(cstring str, ksize_t *position) {
     return (flag);
 }
 
-private kprintf_info_t kprintf_info_init(cstribg str, ksize_t *position, va_list *args) {
+private kprintf_info_t kprintf_info_init(cstring str, ksize_t *position, va_list *args) {
     kprintf_info_t info;
 
     info.flag = check_flags(str, position);
     info.minimum_field_width = nb_spaces(str, position, args);
-    if (str[*position] == '.')
+    if (str[*position] == '.') {
+        *position += 1;
         info.precision = nb_spaces(str, position, args);
-    else
-        info.precision = 0;        
+    } else
+        info.precision = 0;
+    if (info.minimum_field_width == 0 && info.precision > 0) {
+        info.flag |= KPRINTF_FLAG_SPACE;
+        info.minimum_field_width = info.precision;
+    }
+    return (info);
+}
+
+private kprintf_info_t empty_info() {
+    kprintf_info_t info;
+
+    info.flag = KPRINTF_FLAG_NONE;
+    info.minimum_field_width = 0;
+    info.precision = 0;
     return (info);
 }
 
@@ -73,12 +87,12 @@ private void loop_krpintf(va_list *args, \
             if (func != NULL) {
                 func(fd, args, intel);
             } else {
-                kprint_string("%", fd, 0);
-                kprint_char(format[i], fd, 0);
+                kprint_string("%", fd, empty_info(), KPRINTF_TYPE_PRINT_STRING);
+                kprint_char(format[i], fd, empty_info());
             }
             i++;
         } else
-            kprint_char(format[i], fd, 0);
+            kprint_char(format[i], fd, empty_info());
     }
 }
 
