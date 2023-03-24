@@ -13,6 +13,7 @@
 
     void kprintf_fd(int fd, cstring format, ...);
 
+    #define kfprintf(fd, format, ...) kprintf_fd(fd, format, ##__VA_ARGS__)
     #define kprintf(format, ...) kprintf_fd(FD_OUT, format, ##__VA_ARGS__)
     #define kprintf_err(format, ...) kprintf_fd(FD_ERR, format, ##__VA_ARGS__)
 
