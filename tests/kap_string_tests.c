@@ -313,9 +313,9 @@ Test(string_tests, string_get_between_empty_start) {
 
 Test(string_tests, string_get_between_empty_end) {
     string str = str_create_string("Hello World!");
-    string sub = str_value_between(str, "o", "");
+    string sub = str_value_between(str, "o ", "");
 
-    string result = " World!";
+    string result = "World!";
     cr_assert_str_eq(sub, result, "Expected \"%s\", got \"%s\"", result, sub);
 }
 
@@ -405,6 +405,7 @@ Test(string_tests, string_count_null) {
 
 Test(string_tests, string_count_char) {
     ksize_t count = str_count_char("Hello World!", 'l');
+    cr_assert_eq(count, 3, "Expected 3, got %d", count);
 }
 
 //str is number
