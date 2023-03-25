@@ -8,7 +8,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: configure
+      run: |
+        sudo apt-get install libcriterion-dev
+        pip install gcovr
+    - name: make
+      run: make
 
+  unit-tests:
+    needs: build
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: testspace-com/setup-testspace@v1
@@ -19,15 +30,12 @@ jobs:
       run: |
         sudo apt-get install libcriterion-dev
         pip install gcovr
-
     - name: make
       run: make build_tests
-
     - name: run unit tests
       run: |
         make start_runnig_tests
         testspace ./result_tests.xml
-    
     - name: run gcovrage
       run: |
         make check_coverage
