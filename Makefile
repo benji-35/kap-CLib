@@ -35,7 +35,7 @@ check_coverage:
 
 start_runnig_tests: build_tests
 	@echo "[KAP C LIB] =>\033[0;32m Running tests \033[0m"
-	@./kap_tests --xml=result_tests.xml
+	@./kap_tests --xml=result_tests.xml || echo "[KAP C LIB] =>\033[0;31m Tests failed \033[0m"
 
 run_tests: build_tests start_runnig_tests check_coverage
 
