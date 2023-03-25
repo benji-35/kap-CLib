@@ -109,6 +109,18 @@ Test(string_test, string_index_of_str_null) {
     cr_assert_eq(index, result, "Expected %ld, got %ld", result, index);
 }
 
+Test(string_test, last_index_of_char) {
+    string str = str_create_string("Hello World!");
+    ksize_t index = str_last_index_of_char(str, 'o');
+    cr_assert_eq(index, 7, "Expected 7, got %ld", index);
+}
+
+Test(string_test, last_index_of_string) {
+    string str = str_create_string("Hello World!");
+    ksize_t index = str_last_index_of_string(str, "World");
+    cr_assert_eq(index, 6, "Expected 6, got %ld", index);
+}
+
 //is empty and is not empty tests
 Test(string_tests, string_is_empty) {
     string str = str_create_string("Hello World!");
@@ -276,6 +288,12 @@ Test(string_tests, string_reverse) {
     cr_assert_str_eq(str, "!dlroW olleH", "Expected \"!dlroW olleH\", got \"%s\"", str);
 }
 
+Test(string_test, string_reverse_copy) {
+    string str = str_create_string("Hello World!");
+    string rev = str_reverse_copy(str);
+    cr_assert_str_eq(rev, "!dlroW olleH", "Expected \"!dlroW olleH\", got \"%s\"", rev);
+}
+
 //length tests
 Test(string_tests, string_length) {
     string str = str_create_string("Hello World!");
@@ -313,9 +331,9 @@ Test(string_tests, string_get_between_empty_start) {
 
 Test(string_tests, string_get_between_empty_end) {
     string str = str_create_string("Hello World!");
-    string sub = str_value_between(str, "o", "");
+    string sub = str_value_between(str, "o ", "");
 
-    string result = " World!";
+    string result = "World!";
     cr_assert_str_eq(sub, result, "Expected \"%s\", got \"%s\"", result, sub);
 }
 
@@ -405,6 +423,7 @@ Test(string_tests, string_count_null) {
 
 Test(string_tests, string_count_char) {
     ksize_t count = str_count_char("Hello World!", 'l');
+    cr_assert_eq(count, 3, "Expected 3, got %d", count);
 }
 
 //str is number
@@ -457,4 +476,86 @@ Test(string_tests, string_is_decimal_several_dot) {
 Test(string_tests, string_is_decimal_negative) {
     bool is_decimal = str_is_decimal("-123.123");
     cr_assert(is_decimal == true, "Expected true, got false");
+}
+
+//replace tests
+Test(string_tests, string_replace) {
+    string str = str_create_string("Hello World!");
+    string result = str_replace(str, "l", "a");
+    string to_find = "Heaao Worad!";
+    
+    cr_assert_str_eq(result, to_find, "Expected \"%s\", got \"%s\"", to_find, result);
+}
+
+Test(string_tests, string_replace_null) {
+    string str = NULL;
+    string result = str_replace(str, "l", "a");
+    
+    cr_assert_null(result, "Expected NULL, got \"%s\"", result);
+}
+
+Test(string_test, string_replace_no_exists) {
+    string str = str_create_string("Hello World!");
+    string result = str_replace(str, "a", "l");
+    
+    cr_assert_str_eq(result, str, "Expected \"%s\", got \"%s\"", str, result);
+}
+
+//ints to string
+Test(string_tests, string_int_to_string) {
+    string str = int_to_str(123);
+    cr_assert_str_eq(str, "123", "Expected \"123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_int_to_string_negative) {
+    string str = int_to_str(-123);
+    cr_assert_str_eq(str, "-123", "Expected \"-123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_int_to_string_zero) {
+    string str = int_to_str(0);
+    cr_assert_str_eq(str, "0", "Expected \"0\", got \"%s\"", str);
+}
+
+//unsigned ints to string
+Test(string_tests, string_uint_to_string) {
+    string str = ulong_int_to_str(123);
+    cr_assert_str_eq(str, "123", "Expected \"123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_uint_to_string_zero) {
+    string str = ulong_int_to_str(0);
+    cr_assert_str_eq(str, "0", "Expected \"0\", got \"%s\"", str);
+}
+
+//long ints to string
+Test(string_tests, string_long_int_to_string) {
+    string str = long_int_to_str(123);
+    cr_assert_str_eq(str, "123", "Expected \"123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_long_int_to_string_negative) {
+    string str = long_int_to_str(-123);
+    cr_assert_str_eq(str, "-123", "Expected \"-123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_long_int_to_string_zero) {
+    string str = long_int_to_str(0);
+    cr_assert_str_eq(str, "0", "Expected \"0\", got \"%s\"", str);
+}
+
+//long long ints to string
+Test(string_tests, string_long_long_int_to_string) {
+    string str = long_long_int_to_str(123);
+    cr_assert_str_eq(str, "123", "Expected \"123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_long_long_int_to_string_negative) {
+    string str = long_long_int_to_str(-123);
+    cr_assert_str_eq(str, "-123", "Expected \"-123\", got \"%s\"", str);
+}
+
+Test(string_tests, string_long_long_int_to_string_zero) {
+    string str = long_long_int_to_str(0);
+    cr_assert_str_eq(str, "0", "Expected \"0\", got \"%s\"", str);
 }

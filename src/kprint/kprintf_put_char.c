@@ -51,9 +51,10 @@ void kap_put_char(int fd, va_list *data, kprintf_info_t intel) {
 }
 
 void kap_put_string(int fd, va_list *data, kprintf_info_t intel) {
-    string str = va_arg(*data, string);
+    string str = str_copy(va_arg(*data, string));
     
     kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_STRING);
+    kfree(str);
 }
 
 void kap_put_int(int fd, va_list *data, kprintf_info_t intel) {

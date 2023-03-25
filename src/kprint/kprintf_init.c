@@ -12,13 +12,16 @@ kprint_tool_t kprint_init(void) {
         .functions = map_create()
     };
 
-    map_insert(kprint_tool.functions, "d", &kap_put_int, false);
-    map_insert(kprint_tool.functions, "s", &kap_put_string, false);
-    map_insert(kprint_tool.functions, "c", &kap_put_char, false);
-    map_insert(kprint_tool.functions, "x", &kap_put_hex_low, false);
-    map_insert(kprint_tool.functions, "X", &kap_put_hex, false);
-    map_insert(kprint_tool.functions, "b", &kap_put_bin, false);
-    map_insert(kprint_tool.functions, "%", &kap_put_percent, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[0], &kap_put_long_long_int, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[1], &kap_put_long_int, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[2], &kap_put_ulong_int, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[3], &kap_put_char, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[4], &kap_put_int, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[5], &kap_put_string, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[6], &kap_put_hex_low, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[7], &kap_put_hex, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[8], &kap_put_bin, false);
+    map_insert(kprint_tool.functions, KEYS_KPRINTF[9], &kap_put_percent, false);
 
     return kprint_tool;
 }

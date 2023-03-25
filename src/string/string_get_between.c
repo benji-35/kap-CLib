@@ -19,7 +19,7 @@ string str_value_between(cstring str, cstring start, cstring end) {
     if (str_is_equal(end, "", false))
         end_index = str_len(str);
 
-    if (start_index >= str_len(str) || end_index >= str_len(str))
+    if (start_index >= str_len(str) || end_index > str_len(str) || end_index < start_index)
         return NULL;
     start_index += str_len(start);
     value = str_substring(str, start_index, end_index);

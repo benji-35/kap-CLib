@@ -43,6 +43,7 @@ SRC_TEXT	=	$(PATH_TEXT)text_create.c					\
 SRC_CALCUL_STR	=	$(PATH_STRING)calcul/int_to_bin.c		\
 					$(PATH_STRING)calcul/int_to_hex.c		\
 					$(PATH_STRING)calcul/int_to_string.c	\
+					$(PATH_STRING)calcul/long_to_str.c		\
 
 SRC_STRING	+=	$(SRC_TEXT)
 SRC_STRING	+=	$(SRC_CALCUL_STR)

@@ -13,6 +13,7 @@
 
     void kprintf_fd(int fd, cstring format, ...);
 
+    #define kfprintf(fd, format, ...) kprintf_fd(fd, format, ##__VA_ARGS__)
     #define kprintf(format, ...) kprintf_fd(FD_OUT, format, ##__VA_ARGS__)
     #define kprintf_err(format, ...) kprintf_fd(FD_ERR, format, ##__VA_ARGS__)
 
@@ -44,13 +45,20 @@
             KPRINTF_TYPE_PRINT_HEX_LOW,
             KPRINTF_TYPE_PRINT_BIN,
             KPRINTF_TYPE_PRINT_PERCENT,
+            KPRINTF_TYPE_PRINT_LONG_INT,
+            KPRINTF_TYPE_PRINT_LONG_LONG_INT,
+            KPRINTF_TYPE_PRINT_ULONG_INT,
         } kprintf_type_t;
 
         typedef struct kprintf_info_s {
             kprintf_flag_t flag;
             int minimum_field_width;
             int precision;
+            string key;
         } kprintf_info_t;
+
+        #define KEYS_KPRINTF (string[]) { "lld","ld","ul","c","d","s","x","X","b","%"}
+        #define KPRINTF_KEY_SIZE 10
 
         kprint_tool_t kprint_init(void);
 
@@ -61,6 +69,9 @@
         extern void kap_put_hex_low(int fd, va_list *data, kprintf_info_t intel);
         extern void kap_put_bin(int fd, va_list *data, kprintf_info_t intel);
         extern void kap_put_percent(int fd, va_list *data, kprintf_info_t intel);
+        extern void kap_put_long_int(int fd, va_list *data, kprintf_info_t intel);
+        extern void kap_put_long_long_int(int fd, va_list *data, kprintf_info_t intel);
+        extern void kap_put_ulong_int(int fd, va_list *data, kprintf_info_t intel);
 
         extern void kprint_string(cstring str, int fd, kprintf_info_t intel, kprintf_type_t type);
         extern void kprint_char(char c, int fd, kprintf_info_t intel);

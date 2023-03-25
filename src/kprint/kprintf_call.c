@@ -9,6 +9,7 @@
 #include "kaplist.h"
 #include "kaptools.h"
 #include "kapstring.h"
+#include <stdio.h>
 
 private int nb_spaces(cstring str, ksize_t *position, va_list *args) {
     int nb = 0;
@@ -48,6 +49,17 @@ private kprintf_flag_t check_flags(cstring str, ksize_t *position) {
     return (flag);
 }
 
+private string find_key(cstring str, ksize_t *position) {
+    string result = NULL;
+    for (ksize_t i = 0; i < KPRINTF_KEY_SIZE; i++) {
+        if (str_start_with_from(str, KEYS_KPRINTF[i], *position)) {
+            result = KEYS_KPRINTF[i];
+            *position += str_len(KEYS_KPRINTF[i]) - 1;
+        }
+    }
+    return result;
+}
+
 private kprintf_info_t kprintf_info_init(cstring str, ksize_t *position, va_list *args) {
     kprintf_info_t info;
 
@@ -62,6 +74,7 @@ private kprintf_info_t kprintf_info_init(cstring str, ksize_t *position, va_list
         info.flag |= KPRINTF_FLAG_ZERO;
         info.minimum_field_width = info.precision;
     }
+    info.key = find_key(str, position);
     return (info);
 }
 
@@ -81,9 +94,7 @@ private void loop_krpintf(va_list *args, \
         if (format[i] == '%') {
             i++;
             kprintf_info_t intel = kprintf_info_init(format, &i, args);
-            string key = str_create_char(format[i]);
-            auto func = (KPRINTF_FUNC)map_get(tool.functions, key);
-            kfree(key);
+            auto func = (KPRINTF_FUNC)map_get(tool.functions, intel.key);
             if (func != NULL) {
                 func(fd, args, intel);
             } else {

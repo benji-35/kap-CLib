@@ -368,6 +368,10 @@
         */
         extern ksize_t str_count_char_from(cstring str, char c, ksize_t index);
 
+        extern string long_int_to_str(const long int nb);
+        extern string long_long_int_to_str(const long long int nb);
+        extern string ulong_int_to_str(const unsigned long int nb);
+
 
         #define str_length(str) str_len(str)
     #endif
