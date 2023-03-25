@@ -57,7 +57,7 @@
             string key;
         } kprintf_info_t;
 
-        #define KEYS_KPRINTF (string[]) { "lld","ld","ul","c","d","s","x","X","b","%"}
+        #define KEYS_KPRINTF (string[]) { "lld","ld","lu","c","d","s","x","X","b","%"}
         #define KPRINTF_KEY_SIZE 10
 
         kprint_tool_t kprint_init(void);
