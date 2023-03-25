@@ -2,9 +2,6 @@ name: Unit Tests
 
 on:
   push:
-    branches: [ "main", "ft/testsspace" ]
-  pull_request:
-    branches: [ "main", "ft/testsspace" ]
 
 jobs:
   build:
