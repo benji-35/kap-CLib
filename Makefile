@@ -31,13 +31,13 @@ build_tests: all $(OBJ_TESTS)
 
 check_coverage:
 	@echo "[KAP C LIB] =>\033[0;32m Checking coverage \033[0m"
-	@gcovr -r . $(GCOVR_EXCLUDES)
+	@gcovr -r . $(GCOVR_EXCLUDES) --html-details coverage/coverage.html --xml result_coverage.xml
 
 start_runnig_tests: build_tests
 	@echo "[KAP C LIB] =>\033[0;32m Running tests \033[0m"
-	@./kap_tests
+	@./kap_tests --xml=result_tests.xml
 
-run_tests: build_tests start_runnig_tests check_coverage fclean
+run_tests: build_tests start_runnig_tests check_coverage
 
 clean:
 	@rm -f $(OBJ)
