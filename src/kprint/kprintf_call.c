@@ -55,6 +55,7 @@ private string find_key(cstring str, ksize_t *position) {
         if (str_start_with_from(str, KEYS_KPRINTF[i], *position)) {
             result = KEYS_KPRINTF[i];
             *position += str_len(KEYS_KPRINTF[i]) - 1;
+            break;
         }
     }
     return result;

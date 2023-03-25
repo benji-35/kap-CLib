@@ -81,7 +81,7 @@ Test(kap_printf, print_long_long, .init = redirect_all_stdout) {
 }
 
 Test(kap_printf, print_unsigned_long, .init = redirect_all_stdout) {
-        kprintf("Hello %ul", 42);
+        kprintf("Hello %lu", 42);
         cr_assert_stdout_eq_str("Hello 42");
 }
 
