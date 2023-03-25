@@ -70,6 +70,21 @@ Test(kap_printf, print_unknown, .init = redirect_all_stdout)
         cr_assert_stdout_eq_str("Hello %z");
 }
 
+Test(kap_printf, print_long, .init = redirect_all_stdout) {
+        kprintf("Hello %ld", 42);
+        cr_assert_stdout_eq_str("Hello 42");
+}
+
+Test(kap_printf, print_long_long, .init = redirect_all_stdout) {
+        kprintf("Hello %lld", 42);
+        cr_assert_stdout_eq_str("Hello 42");
+}
+
+Test(kap_printf, print_unsigned_long, .init = redirect_all_stdout) {
+        kprintf("Hello %ul", 42);
+        cr_assert_stdout_eq_str("Hello 42");
+}
+
 //test with spaces
 
 Test(kap_printf, print_char_space, .init = redirect_all_stdout)

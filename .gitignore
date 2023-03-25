@@ -56,3 +56,4 @@ dkms.conf
 **libkap.a
 **.gcno
 **.gcda
+**coverage

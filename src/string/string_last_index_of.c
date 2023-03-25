@@ -14,7 +14,7 @@ ksize_t str_last_index_of_char(cstring str, char c) {
     while (last_good < str_len(str)) {
         tmp_good = str_index_of_char_from(str, c, last_good + 1);
         if (tmp_good == str_len(str))
-            return last_good;
+            break;
         last_good = tmp_good;
     }
     return last_good;
@@ -27,7 +27,7 @@ ksize_t str_last_index_of_string(cstring str, cstring cstr) {
     while (last_good < str_len(str)) {
         tmp_good = str_index_of_string_from(str, cstr, last_good + 1);
         if (tmp_good == str_len(str))
-            return last_good;
+            break;
         last_good = tmp_good;
     }
     return last_good;
