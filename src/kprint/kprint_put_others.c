@@ -24,3 +24,27 @@ void kap_put_percent(int fd, va_list *data, kprintf_info_t intel) {
     intel.precision = 0;
     kprint_char('%', fd, intel);
 }
+
+void kap_put_long_int(int fd, va_list *data, kprintf_info_t intel) {
+    long int nb = va_arg(*data, long int);
+    string str = long_int_to_str(nb);
+
+    kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_LONG_INT);
+    kfree(str);
+}
+
+void kap_put_long_long_int(int fd, va_list *data, kprintf_info_t intel) {
+    long long int nb = va_arg(*data, long long int);
+    string str = long_long_int_to_str(nb);
+
+    kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_LONG_LONG_INT);
+    kfree(str);
+}
+
+void kap_put_ulong_int(int fd, va_list *data, kprintf_info_t intel) {
+    unsigned long int nb = va_arg(*data, unsigned long int);
+    string str = ulong_int_to_str(nb);
+
+    kprint_string(str, fd, intel, KPRINTF_TYPE_PRINT_ULONG_INT);
+    kfree(str);
+}
