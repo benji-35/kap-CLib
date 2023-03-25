@@ -12,7 +12,7 @@ ksize_t str_count_str(cstring str, cstring to_find) {
     ksize_t len = str_len(to_find);
 
     for (ksize_t i = 0; i < str_len(str); i++) {
-        if (str_is_equal_from(str, to_find, i, true) == 0) {
+        if (str_start_with_from(str, to_find, i) == true) {
             count++;
             i += len - 1;
         }
