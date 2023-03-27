@@ -99,10 +99,6 @@
             extern void list_clear(list_t *list);
 
             /**
-             * @brief Print the list
-            */
-            extern void list_print(const list_t *list);
-            /**
              * @brief Get the data of the element at the index
             */
             extern void *list_get(const list_t *list, ksize_t index);

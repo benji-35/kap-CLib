@@ -34,25 +34,3 @@ void *list_get_last(const list_t *list) {
         return (NULL);
     return (list->tail->data);
 }
-
-void list_print(const list_t *list) {
-    if (list == NULL)
-        return;
-    list_node_t *node = list->head;
-
-    if (list->size == 0) {
-        printf("[]\n");
-        return;
-    }
-    printf("[");
-    for (ksize_t i = 0; i < list->size; i++) {
-        if (node->print != NULL)
-            node->print(node->data);
-        else
-            printf("%p", node->data);
-        if (i != list->size - 1)
-            printf(", ");
-        node = node->next;
-    }
-    printf("]\n");
-}

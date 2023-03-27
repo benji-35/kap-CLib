@@ -8,7 +8,7 @@
 #include "kaplist.h"
 
 void list_pop(list_t *list) {
-    if (list->size == 0)
+    if (list == NULL || list->size == 0)
         return;
     list_node_t *node = list->tail;
     list->tail = node->prev;
@@ -23,7 +23,7 @@ void list_pop(list_t *list) {
 }
 
 void list_pop_front(list_t *list) {
-    if (list->size == 0)
+    if (list == NULL || list->size == 0)
         return;
     list_node_t *node = list->head;
     list->head = node->next;
@@ -38,6 +38,8 @@ void list_pop_front(list_t *list) {
 }
 
 void list_clear(list_t *list) {
+    if (list == NULL)
+        return;
     while (list->size > 0)
         list_pop(list);
 }

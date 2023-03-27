@@ -82,3 +82,25 @@ Test(text_tests, text_remove_lines_from_tst2) {
     string str = text_to_string(text);
     cr_assert_str_eq(str, "Hello", "Expected \"Hello\", got \"%s\"", str);
 }
+
+Test(text_tests, text_add_text_back) {
+    text_t text = str_split("Hello World!", ' ');
+    text_t txt2 = str_split("Hello World!", ' ');
+
+    text_add_text(text, txt2);
+    cr_assert_eq(text->size, 4, "Expected 4, got %d", text->size);
+    string str = text_to_string(text);
+    string result_want = "Hello\nWorld!\nHello\nWorld!";
+    cr_assert_str_eq(str, result_want, "Expected \"%s\", got \"%s\"", result_want, str);
+}
+
+Test(text_tests, text_add_text_sep) {
+    text_t text = str_split("Hello World!", ' ');
+    text_t txt2 = str_split("Hello World!", ' ');
+
+    text_add_text(text, txt2);
+    cr_assert_eq(text->size, 4, "Expected 4, got %d", text->size);
+    string str = text_to_string_separator(text, " ");
+    string result_want = "Hello World! Hello World!";
+    cr_assert_str_eq(str, result_want, "Expected \"%s\", got \"%s\"", result_want, str);
+}

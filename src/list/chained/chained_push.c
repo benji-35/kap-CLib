@@ -10,8 +10,10 @@
 list_node_t *list_push(list_t *list, void *data) {
     list_node_t *node = calloc(1, sizeof(list_node_t));
 
-    if (node == NULL)
+    if (node == NULL || list == NULL) {
+        kfree(node);
         return NULL;
+    }
     node->data = data;
     node->next = NULL;
     node->prev = list->tail;
@@ -33,8 +35,10 @@ list_node_t *list_push(list_t *list, void *data) {
 list_node_t *list_push_front(list_t *list, void *data) {
     list_node_t *node = calloc(1, sizeof(list_node_t));
 
-    if (node == NULL)
+    if (node == NULL || list == NULL) {
+        kfree(node);
         return NULL;
+    }
     node->data = data;
     node->next = list->head;
     node->prev = NULL;
@@ -70,8 +74,11 @@ private list_node_t *manage_insert_node_chained(list_t *list,
 
 list_node_t *list_insert(list_t *list, void *data, ksize_t index) {
     list_node_t *node = calloc(1, sizeof(list_node_t));
-    if (node == NULL)
+
+    if (node == NULL || list == NULL) {
+        kfree(node);
         return NULL;
+    }
     node->data = data;
     node->destroy = NULL;
     node->equal = NULL;

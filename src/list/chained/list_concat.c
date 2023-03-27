@@ -20,6 +20,8 @@ list_t *list_concat(const list_t *list1, const list_t *list2) {
 }
 
 void list_add_list(list_t *list1, const list_t *list2) {
+    if (list1 == NULL || list2 == NULL)
+        return;
     foreach_l(list2, node) {
         list_push(list1, node->data);
     }
