@@ -158,3 +158,75 @@ Test(kap_yml_test, yaml_key_exists_file2) {
     cr_assert_not_null(node);
     yaml_close(file);
 }
+
+Test(kap_yml_test, yaml_set_list_good) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    list_t *list = list_create();
+    list_push(list, "v1");
+    list_push(list, "v2");
+    yaml_set_list(file, "test.obj1.list3", list);
+    list_t *list_got = yaml_get_list(file, "test.obj1.list3");
+
+    cr_assert_eq(list->size, list_got->size);
+    cr_assert_str_eq(list_get(list, 0), list_get(list_got, 0));
+    cr_assert_str_eq(list_get(list, 1), list_get(list_got, 1));
+}
+
+Test(kap_yml_test, yaml_set_list_null) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    yaml_set_list(file, "test.obj1.list3", NULL);
+    list_t *list_got = yaml_get_list(file, "test.obj1.list3");
+
+    cr_assert_eq(list_got, NULL);
+}
+
+Test(kap_yml_test, yaml_set_list_null_file) {
+    list_t *list = list_create();
+    list_push(list, "v1");
+    list_push(list, "v2");
+    yaml_set_list(NULL, "test.obj1.list3", list);
+    list_t *list_got = yaml_get_list(NULL, "test.obj1.list3");
+
+    cr_assert_eq(list_got, NULL);
+}
+
+Test(kap_yml_test, yaml_set_null_file) {
+    yaml_set(NULL, "test.obj1.list3", "v1");
+    string list_got = yaml_get(NULL, "test.obj1.list3");
+
+    cr_assert_eq(list_got, NULL);
+}
+
+Test(kap_yml_test, yaml_get_object_good) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    yaml_node_t *node = yaml_get_object(file, "test.obj1");
+    cr_assert_not_null(node);
+    yaml_close(file);
+}
+
+Test(kap_yml_test, yaml_get_object_null) {
+    void *node = yaml_get_object(NULL, "test.obj1");
+    cr_assert_eq(node, NULL);
+}
+
+Test(kap_yml_test, yaml_get_object_destroyed) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    yaml_set_list(file, "test.obj1.list", NULL);
+    void *node = yaml_get_object(file, "test.obj1.list");
+    yaml_close(file);
+    cr_assert_eq(node, NULL);
+}
+
+Test(kap_yml_test, yaml_find_first_node_good) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    yaml_get_object(file, "test.obj1");
+    yaml_node_t *node = yaml_find_first_node(file, "test.obj1");
+    cr_assert_not_null(node);
+    yaml_close(file);
+}
+
+Test(kap_yml_test, yaml_find_first_node_null) {
+    yaml_f *file = yaml_open("./tests/configs/test_yaml.yml");
+    void *node = yaml_find_first_node(file, "test.obj2");
+    cr_assert_eq(node, NULL);
+}

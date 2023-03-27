@@ -20,15 +20,6 @@ private ksize_t nb_parent(yaml_node_t *node) {
     return nb;
 }
 
-private void add_keys_parent(yaml_node_t *node, list_t *list) {
-    if (node == NULL)
-        return;
-    if (node->parent != NULL) {
-        add_keys_parent(node->parent, list);
-    }
-    list_push(list, node->key);
-}
-
 private string get_string_yml_write(yaml_node_t *node, ksize_t spaces) {
     string new_line = str_create_empty();
     text_t keys = str_split(node->key, '.');
