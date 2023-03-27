@@ -18,6 +18,7 @@ private xml_node_t *xml_create_added_xml(cstring tag, cstring content, map_t *at
     result->content = str_copy(content);
     result->children = list_create();
     result->attributes = attributes;
+    result->destroyed = false;
     if (result->attributes == NULL)
         result->attributes = map_create();
     return result;
@@ -29,6 +30,8 @@ void xml_add_element(xml_f *xml_file, cstring tag, cstring content, map_t *attri
     xml_node_t *added = xml_create_added_xml(tag, content, attributes);
     if (added == NULL)
         return;
+    added->parent = NULL;
+    added->file = xml_file;
     list_node_t *l_nd = list_push(xml_file->xml, added);
     l_nd->destroy = &xml_node_destroy;
 }
@@ -39,6 +42,8 @@ void xml_add_element_to_node(xml_node_t *xml_node, cstring tag, cstring content,
     xml_node_t *added = xml_create_added_xml(tag, content, attributes);
     if (added == NULL)
         return;
+    added->parent = xml_node;
+    added->file = xml_node->file;
     list_node_t *l_nd = list_push(xml_node->children, added);
     l_nd->destroy = &xml_node_destroy;
 }

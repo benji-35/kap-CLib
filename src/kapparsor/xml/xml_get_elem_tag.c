@@ -22,7 +22,7 @@ private void search_xml_tag_from(xml_node_t *parent, xml_f *file, cstring tag, l
         list_search = parent->children;
     foreach_l(list_search, node) {
         xml_node_t *xml_nd = (xml_node_t *)node->data;
-        if (str_is_equal(xml_nd->tag_name, tag, true) == true)
+        if (str_is_equal(xml_nd->tag_name, tag, true) == true && xml_nd->destroyed == false)
             list_push(result, xml_nd);
         search_xml_tag_from(xml_nd, file, tag, result);
     }

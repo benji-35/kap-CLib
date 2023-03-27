@@ -25,6 +25,7 @@ SRC_MAP	=	$(PATH_MAP)map_destroy.c		\
 			$(PATH_MAP)map_key_exists.c		\
 			$(PATH_MAP)map_get_key.c		\
 			$(PATH_MAP)map_get_size.c		\
+			$(PATH_MAP)map_is_equal.c		\
 
 SRC_LIST	=	$(SRC_CHAINED_LIST)
 SRC_LIST	+=	$(SRC_MAP)

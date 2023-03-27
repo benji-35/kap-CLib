@@ -10,7 +10,7 @@
 private bool can_add_attr_xml_search(xml_node_t *node, cstring attr_name, cstring value) {
     if (node == NULL || attr_name == NULL)
         return false;
-    if (map_key_exists(node->attributes, attr_name) == true) {
+    if (map_key_exists(node->attributes, attr_name) == true && node->destroyed == false) {
         if (value == NULL)
             return true;
         string val = (string)map_get(node->attributes, attr_name);

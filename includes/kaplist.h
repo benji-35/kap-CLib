@@ -245,6 +245,13 @@
              * @return map_t* the new map
             */
            extern map_t *map_create_from_lists(list_t *keys, list_t *values);
+           /**
+            * @brief Check if two maps are equal
+            * @param map1 first map
+            * @param map2 second map
+            * @return true if the maps are equal
+           */
+           extern bool map_is_equal(map_t *map1, map_t *map2);
 
             #define map_add(map, key, data, can_overwrite) map_insert(map, key, data, can_overwrite)
         #endif

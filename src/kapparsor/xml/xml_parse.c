@@ -78,22 +78,20 @@ private void xml_get_attributes(cstring line, xml_node_t *node) {
         string key = str_create_empty();
         string value = NULL;
         while (line[index] != '=') {
-            if (index >= str_len(line))
+            if (index >= str_len(line) || line[index] == ' ' || line[index] == '\t' || line[index] == '>')
                 break;
             str_add_char(&key, line[index]);
             index++;
         }
         index++;
-        if (index >= str_len(line)) {
-            kfree(key);
-            break;
+        if (index < str_len(line)) {
+            string delim = str_create_char(line[index]);
+            if (str_is_equal(delim, "'", true) || str_is_equal(delim, "\"", true)) {
+                value = str_value_between(line + index, delim, delim);
+                index += str_len(value) + 2;
+            }
+            kfree(delim);
         }
-        string delim = str_create_char(line[index]);
-        if (str_is_equal(delim, "'", true) || str_is_equal(delim, "\"", true)) {
-            value = str_value_between(line + index, delim, delim);
-            index += str_len(value) + 2;
-        }
-        kfree(delim);
         map_node_t *nd_mp = map_insert(node->attributes, key, value, false);
         nd_mp->destroy = &kapfree;
         kfree(key);
@@ -112,6 +110,9 @@ private xml_node_t *xml_parse_node(xml_f *file, cstring line, ksize_t *line_inde
     end_tag--;
     xml_node->tag_name = str_copy_from_to(line, 1, end_tag);
     xml_node->children = list_create();
+    xml_node->parent = NULL;
+    xml_node->file = file;
+    xml_node->destroyed = false;
     xml_get_attributes(line, xml_node);
     end_balise = get_end_balise_pos(file->file_content, xml_node->tag_name, *line_index);
     xml_parse_from(xml_node, file, (*line_index + 1), end_balise);

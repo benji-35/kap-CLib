@@ -19,6 +19,8 @@ private void generate_xml_header(text_t txt, xml_f *xml_file) {
 }
 
 private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
+    if (parent == NULL || parent->destroyed)
+        return;
     string line = str_create_empty();
     string end_balise = str_create_string("</");
     string content = str_create_string("\t");
@@ -36,12 +38,14 @@ private void rewrite_xml(text_t text, xml_node_t *parent, ksize_t increment) {
         char delim = '\"';
         str_add_char(&line, ' ');
         str_add_str(&line, attr->key);
-        str_add_char(&line, '=');
-        if (str_contains_char(attr->data, '\"'))
-            delim = '\'';
-        str_add_char(&line, delim);
-        str_add_str(&line, attr->data);
-        str_add_char(&line, delim);
+        if (attr->data != NULL) {
+            str_add_char(&line, '=');
+            if (str_contains_char(attr->data, '\"'))
+                delim = '\'';
+            str_add_char(&line, delim);
+            str_add_str(&line, attr->data);
+            str_add_char(&line, delim);
+        }
     }
     if ((parent->content == NULL || str_is_empty(parent->content)) && parent->children->size == 0) {
         str_add_str(&line, "/>");
