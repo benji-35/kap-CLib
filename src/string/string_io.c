@@ -12,7 +12,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void str_write(cstring str, cstring path, bool append) {
+bool str_write(cstring str, cstring path, bool append) {
     int fd = -1;
     if (append) {
         fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -21,9 +21,10 @@ void str_write(cstring str, cstring path, bool append) {
     }
 
     if (fd < 0)
-        return;
-    write(fd, str, str_len(str));
+        return false;
+    int r = write(fd, str, str_len(str));
     close(fd);
+    return (r >= 0)? true : false;
 }
 
 string str_read(cstring path) {

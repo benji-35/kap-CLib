@@ -125,3 +125,36 @@ Test(map, remove_data) {
     cr_assert_null(data3);
     map_destroy(map);
 }
+
+Test(map, clear_map) {
+    map_t *map = map_create();
+    int *data = malloc(sizeof(int));
+    int *data2 = malloc(sizeof(int));
+    int *data3 = malloc(sizeof(int));
+
+    *data = 42;
+    *data2 = 43;
+    *data3 = 44;
+    map_add(map, "test", data, true);
+    map_add(map, "test2", data2, true);
+    map_add(map, "test3", data3, true);
+    void *data4 = map_get(map, "test");
+    void *data5 = map_get(map, "test2");
+    void *data6 = map_get(map, "test3");
+
+    cr_assert_not_null(data4);
+    cr_assert_not_null(data5);
+    cr_assert_not_null(data6);
+    cr_assert_eq(*((int *)data4), 42, "Expected 42, got %d", *((int *)data4));
+    cr_assert_eq(*((int *)data5), 43, "Expected 43, got %d", *((int *)data5));
+    cr_assert_eq(*((int *)data6), 44, "Expected 44, got %d", *((int *)data6));
+    map_clear(map);
+    void *data7 = map_get(map, "test");
+    void *data8 = map_get(map, "test2");
+    void *data9 = map_get(map, "test3");
+
+    cr_assert_null(data7);
+    cr_assert_null(data8);
+    cr_assert_null(data9);
+    map_destroy(map);
+}
