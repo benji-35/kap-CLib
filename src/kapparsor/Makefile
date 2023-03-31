@@ -15,7 +15,6 @@ SRC_PARSER	=	$(PATH_COMMON)config_open.c	\
 SRC_YML	=	$(PATH_YML)yaml_init.c				\
 			$(PATH_YML)yaml_key_exists.c		\
 			$(PATH_YML)yaml_parse.c				\
-			$(PATH_YML)yaml_read.c				\
 			$(PATH_YML)yaml_save.c				\
 			$(PATH_YML)yaml_get.c				\
 			$(PATH_YML)yaml_find_first_node.c	\
@@ -29,6 +28,7 @@ SRC_XML	=	$(PATH_XML)xml_open.c						\
 			$(PATH_XML)xml_save.c						\
 			$(PATH_XML)xml_get_elem_tag.c				\
 			$(PATH_XML)xml_add.c						\
+			$(PATH_XML)xml_delete.c						\
 
 SRC_PARSER	+=	$(SRC_YML)
 SRC_PARSER	+=	$(SRC_XML)

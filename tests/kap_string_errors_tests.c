@@ -36,3 +36,22 @@ Test(string_error_tests, str_equal_from_bad_str) {
 
     cr_assert_eq(result, false, "Expected false, got %d", result);
 }
+
+Test(string_error_tests, bad_write) {
+    string str = "Hello World!";
+    bool result = str_write(str, "no_folder/file_not_exist.txt", true);
+
+    cr_assert_eq(result, false, "Expected false, got %d", result);
+}
+
+Test(string_error, null_path_to_read) {
+    string readed = str_read(NULL);
+
+    cr_assert_eq(readed, NULL, "Expected NULL, got %s", readed);
+}
+
+Test(string_error, bad_path_to_read) {
+    string readed = str_read("no_folder/file_not_exist.txt");
+
+    cr_assert_eq(readed, NULL, "Expected NULL, got %s", readed);
+}

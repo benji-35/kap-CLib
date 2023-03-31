@@ -31,5 +31,7 @@ void *yaml_get_object(yaml_f *file, cstring key) {
         return NULL;
     if (node->destroyed == true)
         return NULL;
+    if (node->value == NULL)
+        return node;
     return node->value;
 }

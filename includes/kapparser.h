@@ -184,20 +184,26 @@
     #ifndef KAP_XML
         #define KAP_XML
 
-        typedef struct xml_node_s {
+        typedef struct xml_file_s xml_file_t;
+        typedef struct xml_node_s xml_node_t;
+
+        struct xml_node_s {
             string tag_name;
             string content;
             list_t *children;
             map_t *attributes;
-        } xml_node_t;
+            xml_node_t *parent;
+            xml_file_t *file;
+            bool destroyed;
+        };
 
-        typedef struct xml_file_s {
+        struct xml_file_s {
             string path;
             list_t *xml;
             text_t file_content;
             string version;
             string encoding;
-        } xml_file_t;
+        };
 
         typedef xml_file_t xml_f;
         typedef list_t xml_node_list;
@@ -278,6 +284,24 @@
          * @note This function will add an element to the xml node
         */
         extern void xml_add_element_to_node(xml_node_t *xml_node, cstring tag, cstring content, map_t *attributes);
+        /**
+         * @brief delete element from xml file
+         * @param xml_file xml file
+         * @param tag tag of the element
+         * @param content content of the element
+         * @param attributes attributes of the element
+         * @note This function will delete an element from the xml file
+        */
+        extern void xml_delete_element(xml_f *xml_file, cstring tag, cstring content, map_t *attributes);
+        /**
+         * @brief delete element from xml node
+         * @param xml_node xml node
+         * @param tag tag of the element
+         * @param content content of the element
+         * @param attributes attributes of the element
+         * @note This function will delete an element from the xml node
+        */
+        extern void xml_delete_element_node(xml_node_t *nd, cstring tag, cstring content, map_t *attributes);
 
         //tools
         extern void xml_node_destroy(void *data);

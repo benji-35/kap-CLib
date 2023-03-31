@@ -43,3 +43,32 @@ Test(kap_xml_test, xml_parse_attribute) {
     list_destroy(elems);
     xml_close(xml);
 }
+
+Test(kap_xml_test, xml_save_without_changes) {
+    xml_f *xml = xml_open("./tests/configs/test_xml.xml");
+    xml_save(xml);
+
+    
+    list_t *elems = xml_get_element_tag(xml, "config");
+
+    cr_assert_not_null(elems);
+    cr_assert_eq(elems->size, 1);
+    list_destroy(elems);
+
+    xml_close(xml);
+}
+
+Test(kap_xml_test, xml_add_new_element) {
+    xml_f *xml = xml_open("./tests/configs/test_xml.xml");
+    map_t *attrs = map_create();
+    map_insert(attrs, "toto_test", NULL, true);
+    xml_add_element(xml, "config3", "test", attrs);
+
+    list_t *attrs_got = xml_get_element_attribute(xml, "toto_test", NULL);
+
+    xml_node_t *got = list_get(attrs_got, 0);
+    cr_assert_not_null(got);
+    cr_assert_str_eq(got->tag_name, "config3");
+    xml_save(xml);
+    xml_close(xml);
+}

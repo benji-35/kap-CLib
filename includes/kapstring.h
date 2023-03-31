@@ -297,7 +297,7 @@
          * @param path constant string (path to write to)
          * @param append bool (if true, append to the file)
         */
-        extern void str_write(cstring str, cstring path, bool append);
+        extern bool str_write(cstring str, cstring path, bool append);
         /**
          * @brief read a string from a file
          * @param path constant string (path to read from)
