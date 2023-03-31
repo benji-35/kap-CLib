@@ -36,7 +36,7 @@ void map_destroy(map_t *map) {
 map_t *map_create_from_lists(list_t *keys, list_t *values) {
     map_t *map = map_create();
 
-    if (keys->size != values->size) {
+    if (keys == NULL || values == NULL || keys->size != values->size) {
         map_destroy(map);
         return (NULL);
     }
