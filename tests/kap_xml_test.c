@@ -64,11 +64,10 @@ Test(kap_xml_test, xml_add_new_element) {
     map_insert(attrs, "toto_test", NULL, true);
     xml_add_element(xml, "config3", "test", attrs);
 
-    list_t *attrs_got = xml_get_element_attribute(xml, "toto_test", NULL);
+    list_t *attrs_got = xml_get_element_tag(xml, "config3");
 
     xml_node_t *got = list_get(attrs_got, 0);
     cr_assert_not_null(got);
     cr_assert_str_eq(got->tag_name, "config3");
-    xml_save(xml);
     xml_close(xml);
 }
