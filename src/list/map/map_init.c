@@ -8,7 +8,7 @@
 #include "kaplist.h"
 #include "kapstring.h"
 
-map_t *map_create(void) {
+map_t *map_create() {
     map_t *map = malloc(sizeof(map_t));
 
     map->head = NULL;
